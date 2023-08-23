@@ -1,0 +1,33 @@
+<ion-grid>
+  <form [formGroup]= "registerForm" (ngSubmit)="userRegister()">
+    <ion-list>
+      <ion-col size="6" size-md="4" size-lg="2">
+        <ion-item>
+          <ion-row>
+            <ion-input type="text" label="Nome" formControlName="name"></ion-input>
+          </ion-row>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6" size-md="4" size-lg="2">
+        <ion-item>
+          <ion-row>
+            <ion-input type="email" label="Email" formControlName="email"></ion-input>
+          </ion-row>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6" size-md="4" size-lg="2">
+        <ion-item>
+          <ion-row>
+            <ion-input type="password" label="Senha" formControlName="password"></ion-input>
+          </ion-row>
+        </ion-item>
+      </ion-col>
+    </ion-list>
+    <div class="ion-activatable ripple-parent circle">
+      <ion-button fill="clear"  type="submit">Entrar</ion-button>
+      <ion-ripple-effect type="unbounded">
+      </ion-ripple-effect>
+    </div>
+  </form>
+</ion-grid>
+
