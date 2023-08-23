@@ -1,0 +1,8 @@
+{
+  "name": "MuscSwim App",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "ce7ba155"
+}
