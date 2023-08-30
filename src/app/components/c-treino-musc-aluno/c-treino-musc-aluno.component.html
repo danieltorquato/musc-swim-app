@@ -1,0 +1,44 @@
+<ion-toolbar class="toolbar">
+  <ion-buttons slot="start">
+    <ion-back-button default-href="/home-aluno"></ion-back-button>
+  </ion-buttons>
+</ion-toolbar>
+<h1>Treino atual</h1>
+<ion-grid>
+  <ion-radio-group [(ngModel)]="selectedRadio" (ngModelChange)="currentTraining()">
+    <ion-col>
+    <ion-radio value="A">A</ion-radio>
+    </ion-col>
+    <ion-col>
+      <ion-radio value="B">B</ion-radio>
+      </ion-col>
+      <ion-col>
+        <ion-radio value="C">C</ion-radio>
+        </ion-col>
+  </ion-radio-group>
+</ion-grid>
+<ion-list *ngFor="let item of trainingItems" (click)="getIdCard(item.nome)">
+    <ion-card>
+    <ion-card-content>
+      <ion-grid>
+         <ion-row>
+        <ion-col>
+          <iframe width="150" height="230" [src]="trust" title="Supino reto halteres" frameborder="1" allow="encrypted-media" allowfullscreen> </iframe>
+        </ion-col>
+         <ion-col>
+            <ion-card-title>{{item.nome}}</ion-card-title>
+        <ion-card-subtitle>{{item.variacao}}</ion-card-subtitle>
+        <ion-card-subtitle>Polia</ion-card-subtitle>
+        <p><span class="informationData">Repetições:</span > <ion-input value='{{item.repeticoes}}'></ion-input> </p>
+         </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button fill="clear" shape="around" (click)="abrirAlert(nomeExercicio)"><ion-icon slot="start" name="arrow-redo-outline"></ion-icon>
+              Feedback</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-list>

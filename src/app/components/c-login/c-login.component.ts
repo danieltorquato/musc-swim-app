@@ -1,9 +1,9 @@
-import { db } from './../../environment/environment';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore } from 'firebase/firestore';
+import { db } from 'src/environments/environment';
 
 @Component({
   selector: 'app-c-login',
@@ -36,14 +36,11 @@ export class CLoginComponent implements OnInit {
         // Signed in
         const userUid = userCredential.user.uid;
         console.log(userUid);
-        this.navCtrl.navigateRoot(`/tabs/tab2/${userUid}`);
+        this.navCtrl.navigateRoot(`/tabs/tab2`);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
-  }
-  teste() {
-    console.log('tsg');
   }
 }

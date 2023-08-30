@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from 'firebase/firestore';
-import { db } from 'src/app/environment/environment';
+import { db } from 'src/environments/environment';
 
 @Component({
   selector: 'app-c-cadastro',

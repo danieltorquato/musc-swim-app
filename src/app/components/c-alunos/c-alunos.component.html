@@ -1,0 +1,27 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button default-href="/home"></ion-back-button>
+  </ion-buttons>
+  <ion-searchbar animated="true" placeholder="Pesquisar aluno" [(ngModel)]="queryText" (ionInput)="handleChange($event)"></ion-searchbar>
+</ion-toolbar>
+<h1>Lista de Alunos</h1>
+
+      <ion-card *ngFor="let item of results" (click)="pegaId(item.id)" routerLink="/adicionar-exercicios/{{item.id}}">
+        <ion-card-content>
+          <ion-grid>
+             <ion-row>
+             <ion-col>
+                  <img src="{{item.img}}" />
+             </ion-col>
+             <ion-col>
+                <ion-card-title>{{item.shortName}}</ion-card-title>
+            <ion-card-subtitle>{{item.name}}</ion-card-subtitle>
+            <p><span class="informationData">Email:</span > {{item.email}}</p>
+
+             </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+
+      </ion-card>
+
