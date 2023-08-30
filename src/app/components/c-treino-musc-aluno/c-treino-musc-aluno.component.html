@@ -23,7 +23,7 @@
       <ion-grid>
          <ion-row>
         <ion-col>
-          <iframe width="150" height="230" [src]="trust" title="Supino reto halteres" frameborder="1" allow="encrypted-media" allowfullscreen> </iframe>
+          <iframe width="150" height="230" [src]='item.video' scrolling="no" title="Supino reto halteres" frameborder="1" allow="encrypted-media" allowfullscreen> </iframe>
         </ion-col>
          <ion-col>
             <ion-card-title>{{item.nome}}</ion-card-title>
@@ -42,3 +42,5 @@
     </ion-card-content>
   </ion-card>
 </ion-list>
+<ion-button fill="clear" shape="around" (click)="openAlert()"><ion-icon slot="start" name="arrow-redo-outline"></ion-icon>
+  Concluir Treino</ion-button>
