@@ -39,6 +39,8 @@ exerciseObservation: any;
   trainingItemsId: any;
   videoExercise: string = "";
   selectedRadio: string = '';
+  numberReps: number | undefined;
+  trainingItemsReps: any;
   constructor(private exerciciosService: ExerciciosService, private activatedRoute: ActivatedRoute, private navCtrl: NavController) { }
 
   ngOnInit() {
@@ -49,6 +51,7 @@ exerciseObservation: any;
       this.usePupil();
       this.currentTraining();
       this.pegaRadio();
+      this.pegaReps();
     } else {
       alert('Você precisa estar logado');
     }
@@ -72,6 +75,7 @@ exerciseObservation: any;
     if (this.selectedRadio == '') {
 this.selectedRadio = "A";
     }
+
     this.pegaRadio();
     this.trainingItems = [];
     const q = query (collection(db, 'users', `${this.id}`, 'treino'), where("parcela", "==", this.selectedRadio));
@@ -79,8 +83,10 @@ this.selectedRadio = "A";
     querySnapshot.forEach((doc) => {
       this.trainingItems.push(doc.data());
       this.trainingItemsId = doc.data()['id'];
+      this.trainingItemsReps = doc.data()['repeticoes'];
       console.log(this.trainingItems);
     });
+
   }
   async buscarDados(){
     const querySnapshot = await getDocs(collection(db, 'exercicios'));
@@ -181,8 +187,8 @@ this.filterItems = [];
       variacao: variacao,
       peso: null,
       observacao: '',
-      repeticoes: 12,
-      parcela: '',
+      repeticoes: this.trainingItemsReps,
+      parcela: this.selectedRadio,
       id: this.idExercise,
       video:  this.videoExercise
     });
@@ -192,15 +198,18 @@ this.filterItems = [];
       peso: null,
       observacao: '',
       repeticoes: 12,
-      parcela: '',
+      parcela: this.selectedRadio,
       id: this.idExercise,
       video: this.videoExercise
     });
-
+console.log('feito');
   }
     pegaId(id: any){
     }
     pegaRadio(){
 console.log(this.selectedRadio);
+    }
+    pegaReps(){
+      console.log(this.numberReps);
     }
 }

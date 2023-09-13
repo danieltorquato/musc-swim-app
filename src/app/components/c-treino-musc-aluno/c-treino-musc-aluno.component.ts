@@ -90,12 +90,12 @@ export class CTreinoMuscAlunoComponent implements OnInit {
       text: this.message,
       exercise: this.nomeExercicio,
       type: 'exercise',
-      idDoc: ''
+      idDoc: '',
     });
     await updateDoc(this.docRef, {
       idDoc: this.docRef.id,
     });
-    this.docRefs = await addDoc(collection(db, 'users', this.uid, 'feedbackPupil'), {
+    this.docRefs = await addDoc(collection(db, 'users', this.uid, 'sendFeedbacks'), {
       answer: '',
       answered: 'Aguardando Resposta',
       collapsed: false,
@@ -157,12 +157,13 @@ export class CTreinoMuscAlunoComponent implements OnInit {
       text: this.message,
       type: 'training',
       read: 'Lido',
-      idDoc: ''
+      idDoc: '',
+      parcela: this.selectedRadio,
     });
     await updateDoc(this.docRef, {
       idDoc: this.docRef.id,
     });
-    this.docRefs = await addDoc(collection(db, 'users', this.uid, 'feedbackPupil'), {
+    this.docRefs = await addDoc(collection(db, 'users', this.uid, 'sendFeedbacks'), {
       answer: '',
       answered: 'Aguardando Resposta',
       collapsed: false,

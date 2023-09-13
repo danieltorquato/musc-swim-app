@@ -32,7 +32,7 @@
               <ion-card-title>{{item.nome}}</ion-card-title>
           <ion-card-subtitle>{{item.variacao}}</ion-card-subtitle>
           <ion-card-subtitle>Polia</ion-card-subtitle>
-          <p><span class="informationData">Repetições:</span > <ion-input value='{{item.repeticoes}}'></ion-input> </p>
+            <p><span class="informationData">Repetições:</span > <ion-input [(ngModel)]="item.repeticoes" (change)="addExerciseInTraining(item.nome, item.variacao, item.id)"></ion-input> </p>
            </ion-col>
           </ion-row>
         </ion-grid>

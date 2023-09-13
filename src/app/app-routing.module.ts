@@ -25,6 +25,10 @@ const routes: Routes = [
   {
     path: 'treino-musc-aluno',
     loadChildren: () => import('./pages/treino-musc-aluno/treino-musc-aluno.module').then( m => m.TreinoMuscAlunoPageModule)
+  },
+  {
+    path: 'feedback-professor',
+    loadChildren: () => import('./pages/feedback-professor/feedback-professor.module').then( m => m.FeedbackProfessorPageModule)
   }
 
 ];

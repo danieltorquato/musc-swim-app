@@ -19,33 +19,34 @@ export class CAlunosComponent  implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.searchPupils();
+  }
+  async searchPupils(){
     const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       if (user) {
         this.uid = user.uid;
         console.log("Usuário logado: " + this.uid)
-        this.searchPupils();
+        this.queryText='';
+        const queryLa = collection(db, 'users');
+            const q = query(queryLa, where('professor', '==', this.uid));
+            const queryL = await getDocs(q);
+            queryL.forEach(async (docs) => {
+              this.id = docs.id;
+              const docRef = doc(db, 'users', this.id);
+              this.data = await getDoc(docRef);
+              const docRefs = doc(db, 'users', this.uid, 'pupils', this.data.id);
+              setDoc(docRefs, this.data.data());
+              this.dataArray.push(this.data.data());
+              console.log(this.dataArray);
+              this.results = this.dataArray;
+            });
       } else {
         alert('Você precisa estar logado');
       }
     });
 
-  }
-  async searchPupils(){
-    this.queryText='';
-  const queryLa = collection(db, 'users');
-      const q = query(queryLa, where('professor', '==', this.uid));
-      const queryL = await getDocs(q);
-      queryL.forEach(async (docs) => {
-        this.id = docs.id;
-        const docRef = doc(db, 'users', this.id);
-        this.data = await getDoc(docRef);
-        const docRefs = doc(db, 'users', this.uid, 'pupils', this.data.id);
-        setDoc(docRefs, this.data.data());
-        this.dataArray.push(this.data.data());
-        console.log(this.dataArray);
-        this.results = this.dataArray;
-      });
+
 }
 handleChange(event: any) {
 
