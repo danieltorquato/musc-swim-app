@@ -44,7 +44,10 @@ ion-card{
 height: 20.375rem;
 flex-shrink: 0;
 border-radius: 2.25rem;
-border: 5px solid #000C79;
+// border: 5px solid #000C79;
+box-shadow: 0px 1px 4px 0px rgba(0,25,66,1);
+
+
 }
 ion-list{
   background-color: transparent;

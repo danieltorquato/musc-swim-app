@@ -3,6 +3,7 @@
     <ion-back-button default-href="/home-aluno"></ion-back-button>
   </ion-buttons>
 </ion-toolbar>
+<cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
 <h1>Treino atual</h1>
 <ion-grid>
   <ion-radio-group [(ngModel)]="selectedRadio" (ngModelChange)="currentTraining()">
@@ -17,30 +18,34 @@
         </ion-col>
   </ion-radio-group>
 </ion-grid>
-<ion-list *ngFor="let item of trainingItems" (click)="getIdCard(item.nome)">
-    <ion-card>
-    <ion-card-content>
-      <ion-grid>
-         <ion-row>
-        <ion-col>
-          <iframe width="150" height="230" [src]='item.video' scrolling="no" title="Supino reto halteres" frameborder="1" allow="encrypted-media" allowfullscreen> </iframe>
-        </ion-col>
-         <ion-col>
-            <ion-card-title>{{item.nome}}</ion-card-title>
-        <ion-card-subtitle>{{item.variacao}}</ion-card-subtitle>
-        <ion-card-subtitle>Polia</ion-card-subtitle>
-        <p><span class="informationData">Repetições:</span > <ion-input value='{{item.repeticoes}}'></ion-input> </p>
-         </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-button fill="clear" shape="around" (click)="abrirAlert(nomeExercicio)"><ion-icon slot="start" name="arrow-redo-outline"></ion-icon>
-              Feedback</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
-</ion-list>
-<ion-button fill="clear" shape="around" (click)="openAlert()"><ion-icon slot="start" name="arrow-redo-outline"></ion-icon>
-  Concluir Treino</ion-button>
+
+<ion-list>
+     <ion-item *ngFor="let item of trainingItems" (click)="getIdCard(item.nome)">
+        <ion-card  >
+        <ion-card-content>
+          <ion-grid>
+             <ion-row>
+            <ion-col>
+              <iframe width="150" height="230" [src]='item.video' scrolling="no" title="Supino reto halteres" frameborder="1" allow="encrypted-media" allowfullscreen> </iframe>
+            </ion-col>
+             <ion-col>
+                <ion-card-title>{{item.nome}}</ion-card-title>
+            <ion-card-subtitle>{{item.variacao}}</ion-card-subtitle>
+            <ion-card-subtitle>Polia</ion-card-subtitle>
+            <p><span class="informationData">Repetições:</span > <ion-input value='{{item.repeticoes}}'></ion-input> </p>
+             </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-button fill="clear" shape="around" (click)="abrirAlert(nomeExercicio)"><ion-icon slot="start" name="arrow-redo-outline"></ion-icon>
+                  Feedback</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+     </ion-item>
+    </ion-list>
+    <ion-button fill="clear" shape="around" (click)="openAlert()"><ion-icon slot="start" name="arrow-redo-outline"></ion-icon>
+      Concluir Treino</ion-button>
+    </cdk-virtual-scroll-viewport>

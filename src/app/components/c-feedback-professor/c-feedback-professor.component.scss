@@ -1,12 +1,16 @@
+ion-item{
+  --background: transparent;
+
+}
 ion-card{
-  flex-shrink: 0;
   border-radius: 6.25rem 0.625rem 0.625rem 6.25rem;
-  border: 2px solid #000C79;
+  box-shadow: 2px 2px 3px 2px rgba(0,25,66,1);
 
   }
   ion-card-content {
     margin-bottom: 5px;
     // text-align: center;
+
   img {
       width: 6.125rem;
       height: 6rem;
@@ -14,7 +18,7 @@ ion-card{
       box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(255, 255, 255, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
       border-radius: 10px;
       margin-bottom: 2%;
-      margin-right: 4%;
+      margin-right: 5%;
 
     }
   img{
@@ -29,4 +33,9 @@ ion-card{
   }
 ion-button{
   float: right;
+}
+cdk-virtual-scroll-viewport {
+  height: 100%;
+  width: 100%;
+  --background: transparent;
 }

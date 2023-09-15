@@ -3,32 +3,38 @@
     <ion-back-button default-href="#"></ion-back-button>
   </ion-buttons>
 </ion-toolbar>
+<cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
 <ion-radio-group value="typeoffeedback" [(ngModel)]="selectedRadio" (ngModelChange)="searchFeedbacks(selectedRadio)">
   <ion-radio value="exercise">Exercícios</ion-radio><br />
   <ion-radio value="training">Treino</ion-radio><br />
 </ion-radio-group>
-<ion-list *ngFor="let items of item">
-  <ion-card  >
-    <ion-card-content (click)="pegaId(items.pupil)">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="auto">
-            <img src="{{ items.img }}" />
-          </ion-col>
-          <ion-col size="7">
-            <ion-card-title>{{ items.shortName }}</ion-card-title>
-            <ion-card-subtitle>{{ items.name }}</ion-card-subtitle>
-            <p><span class="informationData">Texto:</span> {{ items.text }}</p>
-          </ion-col>
+<ion-list >
+  <ion-item *ngFor="let items of item">
+    <ion-card  >
+      <ion-card-content (click)="pegaId(items.pupil)">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="auto">
+              <img src="{{ items.img }}" />
+            </ion-col>
+            <ion-col size="7">
+              <ion-card-title>{{ items.shortName }}</ion-card-title>
+              <ion-card-subtitle>{{ items.name }}</ion-card-subtitle>
+              <p><span class="informationData">Texto:</span> {{ items.text }}</p>
+              <p *ngIf="items.type === 'exercise'">Exercício: {{items.exercise}}</p>
+            </ion-col>
 
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-    <ion-col size="1">
-      <ion-button fill="clear" (click)="sendFeedback(items.type)">
-        <ion-icon slot="icon-only" name="arrow-undo-sharp"></ion-icon>
-      </ion-button>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+      <ion-col size="1">
+        <ion-button fill="clear" (click)="sendFeedback(items.type)">
+          <ion-icon slot="icon-only" name="arrow-undo-sharp"></ion-icon>
+        </ion-button>
 
-    </ion-col>
-  </ion-card>
+      </ion-col>
+    </ion-card>
+  </ion-item>
+
 </ion-list>
+</cdk-virtual-scroll-viewport>

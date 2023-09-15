@@ -8,13 +8,15 @@ import { FeedbackProfessorPageRoutingModule } from './feedback-professor-routing
 
 import { FeedbackProfessorPage } from './feedback-professor.page';
 import { CFeedbackProfessorComponent } from 'src/app/components/c-feedback-professor/c-feedback-professor.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FeedbackProfessorPageRoutingModule
+    FeedbackProfessorPageRoutingModule,
+    ScrollingModule
   ],
   declarations: [FeedbackProfessorPage, CFeedbackProfessorComponent]
 })

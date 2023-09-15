@@ -20,24 +20,27 @@
           </ion-col>
     </ion-radio-group>
 </ion-grid>
-  <ion-list *ngFor="let item of trainingItems">
-      <ion-card>
+  <ion-list *ngFor="let item of trainingItems"  detail-none>
+    <ion-card>
       <ion-card-content>
-        <ion-grid>
-           <ion-row>
-          <ion-col>
-            <iframe width="100" height="200" [src]='' title="Supino reto halteres" frameborder="1" allow="encrypted-media" allowfullscreen></iframe>
-          </ion-col>
-           <ion-col>
-              <ion-card-title>{{item.nome}}</ion-card-title>
-          <ion-card-subtitle>{{item.variacao}}</ion-card-subtitle>
-          <ion-card-subtitle>Polia</ion-card-subtitle>
-            <p><span class="informationData">Repetições:</span > <ion-input [(ngModel)]="item.repeticoes" (change)="addExerciseInTraining(item.nome, item.variacao, item.id)"></ion-input> </p>
-           </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-content>
-    </ion-card>
+          <ion-item >
+          <ion-grid>
+             <ion-row>
+            <ion-col>
+              <iframe width="100" height="200" [src]='' title="Supino reto halteres" frameborder="1" allow="encrypted-media" allowfullscreen></iframe>
+            </ion-col>
+             <ion-col>
+                <ion-card-title>{{item.nome}}</ion-card-title>
+            <ion-card-subtitle>{{item.variacao}}</ion-card-subtitle>
+            <ion-card-subtitle>Polia</ion-card-subtitle>
+              <span class="informationData">Repetições: <ion-input [(ngModel)]="item.repeticoes" (ngModelChange)="updateDataExercise(item.id, item.repeticoes)"/></span >
+
+             </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        </ion-card-content>
+      </ion-card>
   </ion-list>
   <ion-modal [isOpen]="isModalOpen" (willDismiss)="onWillDismiss($event)">
     <ng-template>

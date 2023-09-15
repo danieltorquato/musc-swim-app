@@ -28,13 +28,13 @@ export class CTreinoMuscAlunoComponent implements OnInit {
   dangerousVideoUrl: string = '';
   videoUrl: any;
   data = new Date();
-  day= String(this.data.getDate());
-  month= String(this.data.toLocaleString('pt-BR', { month: 'long' }));
-  year= String(this.data.getFullYear());
-  hour=String(this.data.getHours());
+  day = String(this.data.getDate());
+  month = String(this.data.toLocaleString('pt-BR', { month: 'long' }));
+  year = String(this.data.getFullYear());
+  hour = String(this.data.getHours());
   minutes = String(this.data.getMinutes());
   horaAtual = `${this.hour}:${this.minutes}`;
-  dataAtual= `${this.day}-${this.month}-${this.year}`;
+  dataAtual = `${this.day}-${this.month}-${this.year}`;
   dateForm: any;
   list: any;
   listagem: void[] = [];
@@ -62,9 +62,9 @@ export class CTreinoMuscAlunoComponent implements OnInit {
     const q = query(collection(db, 'users', `${this.uid}`, 'treino'), where("parcela", "==", this.selectedRadio));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-        this.dangerousVideoUrl = doc.data()['video']
-        console.log(this.dangerousVideoUrl);
-        this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.dangerousVideoUrl);
+      this.dangerousVideoUrl = doc.data()['video']
+      console.log(this.dangerousVideoUrl);
+      this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.dangerousVideoUrl);
       doc.data()['video'] = this.videoUrl;
       console.log(doc.data()['video'])
       this.trainingItems.push(doc.data());
@@ -194,7 +194,7 @@ export class CTreinoMuscAlunoComponent implements OnInit {
       buttons: [
         {
           text: 'Concluir',
-          handler: async() =>{
+          handler: async () => {
 
             this.registerTraining();
           }
@@ -248,28 +248,28 @@ export class CTreinoMuscAlunoComponent implements OnInit {
     });
     await toast.present();
   }
-  async registerTraining(){
+  async registerTraining() {
     const docRef = addDoc(collection(db, 'history', this.uid, this.year), {
-    day: this.day,
-    month:this.month,
-    year:this.year,
-    musc: 1,
-    swim: 0,
-    hour:this.horaAtual,
+      day: this.day,
+      month: this.month,
+      year: this.year,
+      musc: 1,
+      swim: 0,
+      hour: this.horaAtual,
     });
     this.docId = (await docRef).id;
     console.log(this.docId);
     const docRefT = setDoc(doc(db, 'users', this.uid, 'history', this.docId), {
       day: this.day,
-      month:this.month,
-      year:this.year,
+      month: this.month,
+      year: this.year,
       musc: 1,
       swim: 0,
-      hour:this.horaAtual,
-      });
-      await this.registerTrainingAlert()
-    }
-    async registerTrainingAlert() {
+      hour: this.horaAtual,
+    });
+    await this.registerTrainingAlert()
+  }
+  async registerTrainingAlert() {
     const alert = await this.alertController.create({
       header: 'Parabéns',
       subHeader: 'Treino Registrado',
@@ -278,15 +278,15 @@ export class CTreinoMuscAlunoComponent implements OnInit {
     });
 
     await alert.present();
-    }
-    async doneAlert() {
-      const alert = await this.alertController.create({
-        header: 'Parabéns',
-        subHeader: 'Treino Registrado',
-        message: 'Consulte seu histórico',
-        buttons: ['OK']
-      });
+  }
+  async doneAlert() {
+    const alert = await this.alertController.create({
+      header: 'Parabéns',
+      subHeader: 'Treino Registrado',
+      message: 'Consulte seu histórico',
+      buttons: ['OK']
+    });
 
-      await alert.present();
-    }
+    await alert.present();
+  }
 }

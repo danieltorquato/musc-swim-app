@@ -2,7 +2,7 @@ import { Exercicio } from './../../models/exercicios.model';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { InfiniteScrollCustomEvent, IonModal, NavController } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { addDoc, collection, doc, setDoc, getDocs, QuerySnapshot, query, where, getDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, setDoc, getDocs, QuerySnapshot, query, where, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from 'src/environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -40,7 +40,7 @@ exerciseObservation: any;
   videoExercise: string = "";
   selectedRadio: string = '';
   numberReps: number | undefined;
-  trainingItemsReps: any;
+  trainingItemsReps: number | undefined;
   constructor(private exerciciosService: ExerciciosService, private activatedRoute: ActivatedRoute, private navCtrl: NavController) { }
 
   ngOnInit() {
@@ -85,6 +85,8 @@ this.selectedRadio = "A";
       this.trainingItemsId = doc.data()['id'];
       this.trainingItemsReps = doc.data()['repeticoes'];
       console.log(this.trainingItems);
+      console.log(this.trainingItemsReps);
+      console.log(this.trainingItemsId);
     });
 
   }
@@ -197,12 +199,28 @@ this.filterItems = [];
       variacao: variacao,
       peso: null,
       observacao: '',
-      repeticoes: 12,
+      repeticoes: this.trainingItemsReps,
       parcela: this.selectedRadio,
       id: this.idExercise,
       video: this.videoExercise
     });
 console.log('feito');
+  }
+  async updateDataExercise(id: any, repeticoes: number | undefined){
+    try {
+      // Referência ao documento específico que deseja atualizar
+      const docRef = doc(db, `users/${this.id}/treino`, id);
+
+      // Dados que você deseja atualizar (neste caso, apenas as repetições)
+      const dataToUpdate = { repeticoes: repeticoes };
+
+      // Executa o update no documento com os novos dados
+      await updateDoc(docRef, dataToUpdate);
+
+      console.log('Atualização bem-sucedida!');
+    } catch (error) {
+      console.error('Erro ao atualizar o documento:', error);
+    }
   }
     pegaId(id: any){
     }

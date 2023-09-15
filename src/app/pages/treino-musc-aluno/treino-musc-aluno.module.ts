@@ -8,8 +8,7 @@ import { TreinoMuscAlunoPageRoutingModule } from './treino-musc-aluno-routing.mo
 
 import { TreinoMuscAlunoPage } from './treino-musc-aluno.page';
 import { CTreinoMuscAlunoComponent } from 'src/app/components/c-treino-musc-aluno/c-treino-musc-aluno.component';
-import { SafePipe } from 'src/app/safe.pipe';
-
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   imports: [
@@ -17,6 +16,7 @@ import { SafePipe } from 'src/app/safe.pipe';
     FormsModule,
     IonicModule,
     TreinoMuscAlunoPageRoutingModule,
+    ScrollingModule
   ],
   declarations: [TreinoMuscAlunoPage, CTreinoMuscAlunoComponent]
 })
