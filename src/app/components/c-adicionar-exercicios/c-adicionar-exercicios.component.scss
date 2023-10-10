@@ -52,3 +52,8 @@ box-shadow: 0px 1px 4px 0px rgba(0,25,66,1);
 ion-list{
   background-color: transparent;
 }
+cdk-virtual-scroll-viewport {
+  height: 100%;
+  width: 100%;
+  --background: transparent;
+}

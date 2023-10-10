@@ -8,6 +8,8 @@ import { AdicionarExerciciosPageRoutingModule } from './adicionar-exercicios-rou
 
 import { AdicionarExerciciosPage } from './adicionar-exercicios.page';
 import { CAdicionarExerciciosComponent } from 'src/app/components/c-adicionar-exercicios/c-adicionar-exercicios.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { SafePipe } from 'src/app/safe.pipe';
 
 @NgModule({
   imports: [
@@ -15,7 +17,8 @@ import { CAdicionarExerciciosComponent } from 'src/app/components/c-adicionar-ex
     FormsModule,
     IonicModule,
     AdicionarExerciciosPageRoutingModule,
+    ScrollingModule
   ],
-  declarations: [AdicionarExerciciosPage, CAdicionarExerciciosComponent]
+  declarations: [AdicionarExerciciosPage, CAdicionarExerciciosComponent, SafePipe]
 })
 export class AdicionarExerciciosPageModule {}

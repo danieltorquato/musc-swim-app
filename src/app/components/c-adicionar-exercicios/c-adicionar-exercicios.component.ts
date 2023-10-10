@@ -41,6 +41,7 @@ exerciseObservation: any;
   selectedRadio: string = '';
   numberReps: number | undefined;
   trainingItemsReps: number | undefined;
+  htmlSnippet: string = "<script>safeCode()</script>";
   constructor(private exerciciosService: ExerciciosService, private activatedRoute: ActivatedRoute, private navCtrl: NavController) { }
 
   ngOnInit() {

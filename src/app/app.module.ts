@@ -13,9 +13,10 @@ import { firebaseConfig } from 'src/environments/environment';
 import { SafePipe } from './safe.pipe';
 import { CCadastroComponent } from './components/c-cadastro/c-cadastro.component';
 import { CTreinoMuscAlunoComponent } from './components/c-treino-musc-aluno/c-treino-musc-aluno.component';
+import { SafetwoPipe } from './safetwo.pipe';
 
 @NgModule({
-  declarations: [AppComponent, SafePipe],
+  declarations: [AppComponent, SafetwoPipe],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,  AngularFireModule.initializeApp(firebaseConfig),
     AngularFireModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },],
