@@ -1,0 +1,23 @@
+<ion-card>
+  <ion-card-content>
+    <ion-label>{{ seconds }}:{{ centiseconds }}</ion-label>
+  </ion-card-content>
+</ion-card>
+
+<ion-button (click)="start()" [disabled]="isRunning">Iniciar</ion-button>
+<ion-button (click)="stop()" [disabled]="!isRunning">Concluir</ion-button>
+<ion-button (click)="clear()">Novo treino</ion-button>
+<ion-button (click)="recordLap()" [disabled]="!isRunning">Registrar Volta</ion-button>
+
+<div *ngIf="laps.length > 0">
+  <h3>Voltas</h3>
+  <ion-list>
+    <ion-item *ngFor="let lap of laps; let i = index">
+      {{ i + 1 }} - {{ lap.seconds }}:{{ lap.centiseconds }}
+    </ion-item>
+  </ion-list>
+  <h3>Melhor Volta</h3>
+  <p *ngIf="fastestLap">Melhor volta: {{ fastestLap.seconds }}:{{ fastestLap.centiseconds }}</p>
+  <h3>Média de Tempo</h3>
+  <p *ngIf="averageTime">Média de tempo: {{ averageTime.seconds }}:{{ averageTime.centiseconds }}</p>
+</div>

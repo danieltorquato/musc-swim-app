@@ -29,6 +29,10 @@ const routes: Routes = [
   {
     path: 'feedback-professor',
     loadChildren: () => import('./pages/feedback-professor/feedback-professor.module').then( m => m.FeedbackProfessorPageModule)
+  },
+  {
+    path: 'treino-pisc-aluno',
+    loadChildren: () => import('./pages/treino-pisc-aluno/treino-pisc-aluno.module').then( m => m.TreinoPiscAlunoPageModule)
   }
 
 ];
