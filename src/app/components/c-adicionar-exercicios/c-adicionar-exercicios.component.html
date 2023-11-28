@@ -1,14 +1,25 @@
-  <ion-toolbar class="toolbar">
-    <ion-buttons slot="start">
-      <ion-back-button default-href="/pupils"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
+<ion-toolbar class="toolbar" *ngIf="typeTraining === false">
+  <ion-buttons slot="start">
+    <ion-back-button default-href="/alunos"></ion-back-button>
+  </ion-buttons>
+  <ion-button (click)="alterTraining()">
+    Ir para musculação
+  </ion-button>
+</ion-toolbar>
+<ion-toolbar class="toolbar" *ngIf="typeTraining === true">
+  <ion-buttons slot="start">
+    <ion-back-button default-href="/alunos"></ion-back-button>
+  </ion-buttons>
+  <ion-button (click)="alterTraining()">
+    Ir para piscina
+  </ion-button>
+</ion-toolbar>
   <cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
   <ion-button expand="full" (click)="setOpen(true)">
     Teste
   </ion-button>
   <h1>Treino atual</h1>
-  <ion-grid>
+  <ion-grid *ngIf="typeTraining === true">
     <ion-radio-group [(ngModel)]="selectedRadio" (ngModelChange)="currentTraining()">
       <ion-col>
       <ion-radio value="A">A</ion-radio>
@@ -22,7 +33,7 @@
         </ion-radio-group>
       </ion-grid>
 
-  <ion-list >
+  <ion-list *ngIf="typeTraining === true">
     <ion-item *ngFor="let item of trainingItems" >
       <ion-card>
         <ion-card-content>
@@ -58,8 +69,8 @@
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="filterExercises()" color="medium"
-        placeholder="Pesquisar Exercício">
+      <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterExercises($event)" id="mySearchbar" color="medium "
+        placeholder="Pesquisar Exercício" style="text-transform:uppercase">
       </ion-searchbar>
       <ion-select [(ngModel)]="searchCategory" aria-label="categorias" id="" (ionChange)="filterExercisesCategory()"
         placeholder="Selecione a Categoria" multiple="false">

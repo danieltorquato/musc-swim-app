@@ -1,73 +1,163 @@
-  <ion-grid class="main">
-    <ion-row class="card " >
-      <ion-col class="statics">
-       <div class="staticsData ">
+<ion-card class="cardPerfil" style="max-width: 540px; margin: auto;" *ngFor="let user of listArray">
+  <ion-grid *ngIf="user.isProfessor === false">
+    <ion-row class="container">
+      <ion-col size-md="2" size-lg="1">
+        <!-- Coluna vazia para criar espaço à esquerda -->
+      </ion-col>
+      <ion-col size-md="8" size-lg="5" class="profile-col">
+        <div class="profile-picture">
+          <img class="iconImg" src="{{user.img}}" alt="">
+        </div>
+        <h2 class="shortName">{{user.shortName}}</h2>
 
-          <ion-col class="staticsContent">
-            <div><h5>Musculação</h5></div>
-<div><h3>Parcela de hoje: A</h3></div>
-<div><h3> <ion-button fill="solid" color="primary" >Iniciar treino</ion-button></h3></div>
-          </ion-col>
-          <ion-col class="staticsContent">
-            <div><h5>Natação</h5></div>
-<div><h3>Melhor tempo: 15"45
-</h3></div>
-<div><h3> <ion-button fill="solid" color="primary" >Iniciar treino</ion-button></h3></div>
-          </ion-col>
-       </div>
+        <h6 class="editPerfil"><a href="/account">Editar Perfil</a></h6>
+      </ion-col>
+      <ion-col size-md="2" size-lg="6" class="alert-col">
+        <a>
+          <button class="iconAlert icons">
+            <p class="iconText">Alertas</p>
+            <img class="imgAlert" src="https://img.icons8.com/ios/30/000000/alarms.png" alt="Alertas">
+          </button>
+        </a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="user.isProfessor === true">
+    <ion-row class="container">
+      <ion-col size-md="2" size-lg="1">
+        <!-- Coluna vazia para criar espaço à esquerda -->
+      </ion-col>
+      <ion-col size-md="8" size-lg="5" class="profile-col">
+        <div class="profile-picture">
+          <img class="iconImg" src="{{user.img}}" alt="">
+        </div>
+        <h2 class="shortName">{{user.shortName}}</h2>
+       <span class="cref"> <strong>CREF: </strong>{{user.cref}}</span>
+        <h6 class="editPerfil"><a href="/account">Editar Perfil</a></h6>
+      </ion-col>
+      <ion-col size-md="2" size-lg="6" class="alert-col">
+        <a>
+          <button class="iconAlert icons">
+            <p class="iconText">Alertas</p>
+            <img class="imgAlert" src="https://img.icons8.com/ios/30/000000/alarms.png" alt="Alertas">
+          </button>
+        </a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>
+<div class="second-panel" style="max-width: 540px; margin: auto;" *ngFor="let item of listArray">
+  <ion-grid *ngIf="item.isProfessor === false">
+    <ion-row class="iconsGrid" style="max-width: 540px; ">
+      <ion-col>
+
+         <a  >
+           <button class="icons">
+              <img src="https://img.icons8.com/017bcc/personal-trainer" />
+              <p >Personal</p>
+           </button>
+         </a>
+
+    <a>
+      <button class="icons">
+      <img src="https://img.icons8.com/017bcc/swimming"/>
+      <p>Natação</p>
+      </button>
+    </a>
 
       </ion-col>
+      <ion-col>
+        <a href="/schedule">
+        <button class="icons" >
+          <img src="https://img.icons8.com/017bcc/view-shedule.png"/>
+          <p>Agenda</p>
+        </button>
+     </a>
+     <a href="/history">
+      <button class="icons">
+        <img src="https://img.icons8.com/017bcc/clock"/>
+        <p>Histórico</p>
+      </button>
+    </a>
 
+    </ion-col>
+ <ion-col>
+     <a>
+        <button class="icons">
+          <img src="https://img.icons8.com/017bcc/chat"/>
+          <p>Feedback</p>
+        </button>
+     </a>
+      <a href="/musc-training">
+        <button class="icons">
+        <img src="https://img.icons8.com/017bcc/strength"/>
+        <p>Meu treino</p>
+        </button>
+    </a>
+ </ion-col>
     </ion-row>
-    <ion-row class="bottomcard">
-      <ion-grid class="ion-align-items-center" >
-        <ion-row class="vertical-center" >
-          <ion-col size="3"  class="horizontal-end flexstart" >
-            <img src="https://img.icons8.com/ios/80/personal-trainer.png" width="80" height="80" alt="" class="iconPerfil"> <br/>
-            <ion-button>Editar Perfil</ion-button>
-          </ion-col>
-          <ion-col size="3"  class="horizontal-center flexstart">
-            <h1> Daniel Torquato</h1>
-           <p class="bold" style="font-weight: bold;">Altura: 1,80m </p>
-           <p style="font-weight: bold;">Peso: 113kg</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-row>
-    <ion-row class="midcard">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="4" size-sm="3">
-            <img src="https://img.icons8.com/ios/80/FFFFFF/personal-trainer.png" width="80" height="80" alt="">
-           <ion-row>Teste</ion-row>
-          </ion-col>
-          <ion-col size="4" size-sm="3">
-          <img src="https://img.icons8.com/ios/80/FFFFFF/personal-trainer.png" width="80" height="80" alt="">
-          <ion-row>Teste</ion-row>
-          </ion-col>
-          <ion-col size="4" size-sm="3">
-          <img src="https://img.icons8.com/ios/80/FFFFFF/personal-trainer.png" width="80" height="80" alt="">
-          <ion-row>Teste</ion-row>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-        </ion-row>
-        <ion-row>
-          <ion-col size="4" size-sm="3">
-            <img src="https://img.icons8.com/ios/80/FFFFFF/personal-trainer.png" width="80" height="80" alt="">
-            <ion-row>Teste</ion-row>
-          </ion-col>
-          <ion-col size="4" size-sm="3">
-          <img src="https://img.icons8.com/ios/80/FFFFFF/personal-trainer.png" width="80" height="80" alt="">
-          <ion-row>Teste</ion-row>
-          </ion-col>
-          <ion-col size="4" size-sm="3">
-          <img src="https://img.icons8.com/ios/80/FFFFFF/personal-trainer.png" width="80" height="80" alt="">
-          <ion-row>Teste</ion-row>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-row>
-
   </ion-grid>
+
+  <ion-grid *ngIf="item.isProfessor === true">
+    <ion-row class="iconsGrid" style="max-width: 540px; ">
+      <ion-col>
+
+         <a href="/alunos">
+           <button class="icons">
+              <img src="https://img.icons8.com/017bcc/user" />
+              <p >Alunos</p>
+           </button>
+         </a>
+
+    <a>
+      <button class="icons">
+      <img src="https://img.icons8.com/017bcc/swimming"/>
+      <p>Natação</p>
+      </button>
+    </a>
+
+      </ion-col>
+      <ion-col>
+        <a href="/schedule">
+        <button class="icons" >
+          <img src="https://img.icons8.com/017bcc/view-shedule.png"/>
+          <p>Agenda</p>
+        </button>
+     </a>
+     <a href="/history">
+      <button class="icons">
+        <img src="https://img.icons8.com/017bcc/clock"/>
+        <p>Histórico</p>
+      </button>
+    </a>
+
+    </ion-col>
+ <ion-col>
+     <a>
+        <button class="icons">
+          <img src="https://img.icons8.com/017bcc/chat"/>
+          <p>Feedback</p>
+        </button>
+     </a>
+      <a href="/musc-training">
+        <button class="icons">
+        <img src="https://img.icons8.com/017bcc/strength"/>
+        <p>Treinos</p>
+        </button>
+    </a>
+ </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</div>
+
+
+
+
+
+
+
+
+
+<ion-button (click)='logout()'></ion-button>
 

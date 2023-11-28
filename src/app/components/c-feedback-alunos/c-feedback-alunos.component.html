@@ -1,0 +1,25 @@
+
+  <h1>Meus Feedbacks</h1>
+    <ion-list >
+      <ion-item *ngFor="let feedback of feedbacks">
+        <div class="card-container">
+          <ion-card class="feedback-card" >
+            <ion-card-header>
+              <ion-card-title class="status-feedback" [ngClass]="{ 'answered': feedback.answered === false}">{{ feedback.answered }}</ion-card-title>
+              <ion-card-subtitle class="data-feedback">{{ feedback.createDate | date }}</ion-card-subtitle>
+              <ion-card-title class="aluno-nome">{{ feedback.name }}</ion-card-title>
+              <ion-card-title class="exercicio-nome">{{ feedback.exercise }}</ion-card-title>
+              <ion-card-title class="exercicio-nome">{{ feedback.answer }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content [innerHTML]="feedback.text" [class.collapsed]="feedback.collapsed">
+            </ion-card-content>
+            <ion-button expand="full" class="expandir-button" (click)="toggleCollapse(feedback)">
+              {{ feedback.collapsed ? 'Expandir' : 'Recolher' }}
+              <ion-icon name="arrow-down-outline" *ngIf="feedback.collapsed"></ion-icon>
+              <ion-icon name="arrow-up-outline" *ngIf="!feedback.collapsed"></ion-icon>
+            </ion-button>
+          </ion-card>
+        </div>
+      </ion-item>
+
+    </ion-list>

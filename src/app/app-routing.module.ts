@@ -33,6 +33,14 @@ const routes: Routes = [
   {
     path: 'treino-pisc-aluno',
     loadChildren: () => import('./pages/treino-pisc-aluno/treino-pisc-aluno.module').then( m => m.TreinoPiscAlunoPageModule)
+  },
+  {
+    path: 'historico',
+    loadChildren: () => import('./pages/historico/historico.module').then( m => m.HistoricoPageModule)
+  },
+  {
+    path: 'feedback-alunos',
+    loadChildren: () => import('./pages/feedback-alunos/feedback-alunos.module').then( m => m.FeedbackAlunosPageModule)
   }
 
 ];

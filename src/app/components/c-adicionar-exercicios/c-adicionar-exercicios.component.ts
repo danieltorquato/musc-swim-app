@@ -1,12 +1,13 @@
 import { Exercicio } from './../../models/exercicios.model';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { InfiniteScrollCustomEvent, IonModal, NavController } from '@ionic/angular';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { addDoc, collection, doc, setDoc, getDocs, QuerySnapshot, query, where, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from 'src/environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ExerciciosService } from 'src/app/services/exercicios.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-c-adicionar-exercicios',
@@ -21,7 +22,7 @@ export class CAdicionarExerciciosComponent  implements OnInit {
   items:any[] = [];
   filterItems: any[] = [];
   name: any;
-  searchTerm = '';
+  searchTerm: string = '';
   searchCategory = '';
   isModalOpen: boolean | undefined;
  id:  string | null='';
@@ -41,8 +42,14 @@ exerciseObservation: any;
   selectedRadio: string = '';
   numberReps: number | undefined;
   trainingItemsReps: number | undefined;
+  typeTraining = true;
+  @ViewChild('mySearchbar') mySearchbar: ElementRef;
+
   htmlSnippet: string = "<script>safeCode()</script>";
-  constructor(private exerciciosService: ExerciciosService, private activatedRoute: ActivatedRoute, private navCtrl: NavController) { }
+  constructor(private exerciciosService: ExerciciosService, private activatedRoute: ActivatedRoute, private navCtrl: NavController) {
+    this.mySearchbar = new ElementRef(null);
+
+   }
 
   ngOnInit() {
     const auth = getAuth();
@@ -145,17 +152,35 @@ emptyList(){
       this.addExercise();
     }
   }
-  filterExercises() {
+  async filterExercises(event: any) {
+
     this.videoExercise = "";
     this.searchCategory = '';
-    if(this.searchTerm.length === 0){
-      this.emptyList();
-      this.filterItems = [];
-          }
-    // Filtrar os exercícios com base no termo de pesquisa
-    this.filterItems = this.items.filter(item =>
-      item.nome.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+    console.log(event.target.value);
+  const querys:string = event.target.value;
+  // eslint-disable-next-line eqeqeq
+  if (querys && querys.trim() != '') {
+    const q = query(collection(db, 'exercicios'), where("nome","==",querys));
+    this.videoExercise = "";
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      this.items.push(doc.data());
+      this.filterItems = this.items;
+      this.exerciseName = doc.data()['nome'];
+      this.exerciseVariation = doc.data()['variacao'];
+      this.idExercise = doc.data()['id'];
+      this.videoExercise = doc.data()['video'];
+      console.log(this.filterItems);
+    });
+    this.items = _.values(this.filterItems);
+    console.log(this.items);
+    this.items = this.items.filter((dados: { name: string; }) => dados.name[0].toUpperCase()+  dados.name.substr(1));
+    console.log(this.items);
+  }else if(querys || querys.trim() == '' && querys.trim() != this.exerciseName){
+    this.items = [];
+    this.filterItems = [];
+
+  }
     }
   async filterExercisesCategory() {
     this.videoExercise = "";
@@ -230,5 +255,14 @@ console.log(this.selectedRadio);
     }
     pegaReps(){
       console.log(this.numberReps);
+    }
+    alterTraining(){
+      this.typeTraining = !this.typeTraining
+      console.log(this.typeTraining)
+    }
+    resetInput(){
+      this.searchTerm =  ''
+      this.mySearchbar.nativeElement.value = '';
+
     }
 }

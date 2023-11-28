@@ -39,7 +39,7 @@ h1{
 .informationData{
   font-weight: bold;
 }
-ion-card{
+.card{
   width: 24rem;
 height: 20.375rem;
 flex-shrink: 0;
@@ -52,4 +52,57 @@ ion-list{
 cdk-virtual-scroll-viewport {
   height: 100%;
   width: 100%;
+}
+/* Estilo do input do toggle (escondido) */
+.toggle-checkbox {
+  display: none;
+}
+.scrollModal{
+  height: 100%;
+
+width: 100%;
+}
+/* Estilo do rótulo do toggle */
+.toggle-label {
+  display: inline-block;
+  width: 60px; /* Largura do toggle */
+  height: 30px; /* Altura do toggle */
+  background-color: #ccc; /* Cor de fundo padrão do toggle */
+  border-radius: 30px; /* Para criar uma forma redonda */
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  float: right;
+}
+
+/* Estilo do rótulo quando o toggle está marcado (ligado) */
+.toggle-checkbox:checked + .toggle-label {
+  background-color: #2ecc71; /* Cor de fundo quando ligado */
+}
+
+/* Estilo do círculo deslizante do toggle */
+.toggle-label::before {
+  content: "";
+  position: absolute;
+  width: 26px; /* Largura do círculo deslizante */
+  height: 26px; /* Altura do círculo deslizante */
+  border-radius: 50%; /* Forma de círculo */
+  background-color: #fff; /* Cor do círculo deslizante */
+  left: 2px; /* Inicialmente à esquerda */
+  transition: left 0.3s;
+}
+
+/* Estilo do círculo deslizante quando o toggle está marcado (ligado) */
+.toggle-checkbox:checked + .toggle-label::before {
+  left: 32px; /* Move o círculo deslizante para a direita */
+}
+.typeTraining{
+  float: right;
+}
+cdk-virtual-scroll-viewport{
+height: 70%;
+}
+.sets{
+  display: flex;
+  flex-direction: row;
 }

@@ -1,88 +1,133 @@
-.card{
-  margin-left:-1.5%;
-  width: 46.1vh;
-  height: 27rem;
-  // border-radius: 70px 70px 0px 0px;
-  background-color: rgb(255, 255, 255);
-  color: #000;
-  text-align: center;
-}
-.midcard{
-  position: fixed;
-  margin-left: -0.7rem;
-  width: 102%;
-  height: 18rem;
-  border-radius: 70px 70px 70px 70px;
-  background-color: rgb(14, 5, 53);
-  margin-top: -35rem;
-  text-align: center;
-  color: #ffffff;
-  // display: none;
-}
-.bottomcard{
-   margin-left: -2rem;
-  width: 100vh;
-  height: 25.5rem;
-  // border-radius: 0px 0px 70px 70px;
-  background-color:  rgb(14, 5, 53);
-color: white;
-}
-img{
-  color: white;
-}
-.vertical-center {
+/* Estilos para centralizar a imagem de perfil e torná-la redonda */
+.profile-col {
   display: flex;
-  align-items: flex-end;
-  height: 100%; /* Para ocupar a altura total do container pai */
-  margin-top: -40px;
-  color: #ffffff;
-}
-.horizontal-center {
-  display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  color: #ffffff;
+  text-align: center;
 }
-.horizontal-end {
+
+.profile-picture {
+  width: 120px; /* Defina o tamanho desejado para a imagem de perfil */
+  height: 120px; /* Defina o tamanho desejado para a imagem de perfil */
+  border-radius: 200px;
+  overflow: hidden; /* Corta a parte da imagem que não é visível dentro do círculo */
+  margin-top: 5%;
+}
+
+/* Outros estilos de design (ajuste conforme necessário) */
+.iconImg {
+  width: 100%; /* Preenche todo o círculo */
+  height: 100%; /* Preenche todo o círculo */
+}
+
+.iconAlert {
+  text-align: right;
+  background: transparent;
+  float: left;
+}
+.alert-col {
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  text-align: end;
-  color: #ffffff;
+  flex-direction: column;
+  justify-content: center; /* Alinha o conteúdo verticalmente no centro */
 
 }
-.iconPerfil{
-  width: 120px;
-  height: 120px;
-  border-radius: 100px;
-  border: 1px rgb(255, 255, 255) solid;
-}
-.flexcolum{
-flex-direction: column;
-}
-ion-button{
-  width: 8rem;
-  color:black;
-  border-color: #000;
-}
-.staticsData{
-  display: flex;
-}
-.statics{
-  border: 1px solid black;
-}
-.staticsContent{
-  border: 1px solid black;
-margin: 5px;
-border-radius: 30px;
-}
-.flex{
-  display: flex;
-  flex-direction: column;
-  margin-top: 0px;
-}
-.flexstart{
-  display: flex;
-  flex-direction: column;
-  // margin-bottom: -40px;
-}
+.icons{
+  height: 80px;
+  width: 70px;
+  border-radius: 10px;
+  background-color: transparent;
+  }
+  .iconsGrid ion-col a button{
+    margin-left: 10px; /* Espaçamento uniforme em todas as direções */
+    margin-bottom: 50px;
+  }
+  .container{
+  // background-color: aliceblue;
+  margin-left: -12%;
+
+  }
+  .iconsGrid{
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    margin-right: -10%;
+    margin-top: 20%;
+  }
+
+  .second-panel {
+    position: absolute;
+    top: 28%; /* Distância de 10% a partir do topo do primeiro painel */
+    left: 0;
+    width: 100%; /* Largura de 100% para preencher a largura do primeiro painel */
+    background-color: #00006d;
+    border-radius: 100px 100px 0px 0px;
+    height: 75vh; /* Altura de 75% da altura visível do dispositivo */
+    max-height: 896px;
+  }
+  .editPerfil{
+    margin-top: 4%;
+    text-decoration: none;
+
+  }
+  .cref{
+    margin-top: -1%;
+  }
+  .shortName{
+    margin-top: -1%;
+  }
+  .cardPerfil
+  {
+    border-radius: 120px 0px 130px 0px;
+// background-color: white;
+    height: 30vh;
+    width: 120%;
+    text-align: center;
+    // margin-left: -25px;
+    margin-top: -1%;
+    position: relative;
+  //   position: relative;
+  //   right: 4.5%;
+  //   top: 6.5%;
+  //   display: flex;
+  // justify-content: center;
+  // justify-items: center;
+  }
+  .iconImg{
+  // position: absolute;
+  // width: 120px;
+  // height: 120px;
+  // border-radius: 200px;
+  // top: 12%;
+  // left: 35%;
+  }
+  .iconAlert{
+  // text-align: center;
+  // background-color: transparent;
+  // max-width: 150px;
+  }
+
+  // .iconAlert2{
+  // position: absolute !important;
+  // bottom: 60.5% !important;
+  // right: 78% !important;
+  // }
+
+  // h2{
+  //   position: absolute;
+  //   top: 34%;
+  //   }
+  // h6{
+  // position: absolute;
+  // top: 42%;
+  // }
+  // .imgAlert{
+  // position: absolute;
+  // left: 32%;
+  // bottom: 18%;
+  // }
+  // .iconText{
+  // position: absolute;
+  // bottom: 50%;
+  // left: 11%;
+  // font-size: large;
+  // }
