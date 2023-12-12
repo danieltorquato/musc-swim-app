@@ -18,6 +18,9 @@
   <ion-button expand="full" (click)="setOpen(true)">
     Teste
   </ion-button>
+  <ion-button expand="full" (click)="newTraining()">
+  Novo treino
+  </ion-button>
   <h1>Treino atual</h1>
   <ion-grid *ngIf="typeTraining === true">
     <ion-radio-group [(ngModel)]="selectedRadio" (ngModelChange)="currentTraining()">

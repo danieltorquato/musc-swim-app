@@ -52,6 +52,8 @@ typeTraining = true;
   public fastestLap: { seconds: number; centiseconds: number } | null = null;
   public averageTime: { seconds: number; centiseconds: number } | null = null;
   isModalOpen = false;
+  trainingSwimItems: any[] = [];
+  trainingSwimItemsId: any;
 
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
@@ -256,6 +258,7 @@ typeTraining = true;
         if (queryUser.exists()) {
           console.log('Document data:', queryUser.data());
           this.dataUser = queryUser.data();
+
         } else {
           // docSnap.data() will be undefined in this case
           console.log('No such document!');
@@ -323,6 +326,10 @@ typeTraining = true;
   }
   alterTraining(){
     this.typeTraining = !this.typeTraining
+    if (this.typeTraining === false) {
+      this.trainingSwim();
+
+    }
   }
   start() {
     if (!this.isRunning) {
@@ -425,4 +432,23 @@ this.presentAlert();
 
     await alert.present();
   }
+async trainingSwim(){
+this.trainingSwimItems = []
+  const q = query(collection(db, 'users', `${this.uid}`, 'treinoPiscina'))
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach(async (doc) => {
+    this.dangerousVideoUrl = doc.data()['video']
+    this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.dangerousVideoUrl);
+    doc.data()['video'] = this.videoUrl;
+    this.trainingSwimItemsId = doc.data()['docId'];
+    const q = query(collection(db, 'users', `${this.uid}`, 'treinoPiscina', this.trainingSwimItemsId, 'exercícios'))
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      this.trainingSwimItemsId = doc.data()['docId'];
+      this.trainingSwimItems.push(doc.data());
+
+      console.log(this.trainingSwimItems);
+    });
+  });
+}
 }

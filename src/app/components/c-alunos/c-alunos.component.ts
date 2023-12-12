@@ -13,7 +13,7 @@ export class CAlunosComponent  implements OnInit {
   id: string = "";
   data: any;
   dataArray: any[] = [];
-  results: any;
+  results: any[] = [];
   queryText: string = "";
 
   constructor() { }
@@ -39,7 +39,7 @@ export class CAlunosComponent  implements OnInit {
               setDoc(docRefs, this.data.data());
               this.dataArray.push(this.data.data());
               console.log(this.dataArray);
-              this.results = this.dataArray;
+              this.results.push(this.dataArray);
             });
       } else {
         alert('Você precisa estar logado');

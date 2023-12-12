@@ -1,6 +1,6 @@
 <ion-toolbar class="toolbar" *ngIf="typeTraining === false">
   <ion-buttons slot="start">
-    <ion-back-button default-href="/home-aluno"></ion-back-button>
+    <ion-back-button default-href="/tabs/tab2"></ion-back-button>
   </ion-buttons>
   <ion-button (click)="alterTraining()">
     Ir para musculação
@@ -8,7 +8,7 @@
 </ion-toolbar>
 <ion-toolbar class="toolbar" *ngIf="typeTraining === true">
   <ion-buttons slot="start">
-    <ion-back-button default-href="/home-aluno"></ion-back-button>
+    <ion-back-button default-href="/tabs/tab2"></ion-back-button>
   </ion-buttons>
   <ion-button (click)="alterTraining()">
     Ir para piscina
@@ -30,7 +30,7 @@
 </ion-grid>
 
 
-  <ion-button expand="block" (click)="setOpen(true)" *ngIf="typeTraining === false">Open</ion-button>
+  <ion-button expand="block" (click)="setOpen(true)" *ngIf="typeTraining === false">Marcar Tempo</ion-button>
   <ion-modal [isOpen]="isModalOpen">
     <cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350" class="scrollModal">
     <ng-template>
@@ -90,7 +90,7 @@
             <ion-card-subtitle>{{item.variacao}}</ion-card-subtitle>
             <ion-card-subtitle>Polia</ion-card-subtitle>
             <p><span class="informationData">Repetições:</span > <ion-input value='{{item.repeticoes}}'></ion-input> </p>
-              <div class="sets"><p *ngFor="let items of item.set">{{items[0]}}{{items[1]}}{{items[2]}}{{items[3]}}</p></div>
+              <!-- <div class="sets"><p *ngFor="let items of item.set">{{items[0]}}{{items[1]}}{{items[2]}}{{items[3]}}</p></div> -->
              </ion-col>
             </ion-row>
             <ion-row>
@@ -106,11 +106,34 @@
      </ion-item>
 
 
-      <swiper-container *ngIf="typeTraining === false">
-        <swiper-slide>Slide 1</swiper-slide>
-        <swiper-slide>Slide 2</swiper-slide>
-        <swiper-slide>Slide 3</swiper-slide>
-      </swiper-container>
+     <ion-item  *ngIf="typeTraining === false" class=".card">
+      <ion-card *ngFor="let item of trainingSwimItems">
+      <ion-card-content>
+        <ion-grid>
+           <ion-row>
+          <ion-col>
+            <iframe width="150" height="230"  scrolling="no" title="Supino reto halteres" frameborder="1" allow="encrypted-media" allowfullscreen> </iframe>
+          </ion-col>
+           <ion-col>
+              <ion-card-title>{{item.nome}}</ion-card-title>
+          <ion-card-subtitle>Intensidade: {{item.intensidade}}</ion-card-subtitle>
+
+          <p><span class="informationData">Variação:</span > <ion-input value='{{item.variacao}}'></ion-input> </p>
+          <p><span class="informationData">Metros:</span > <ion-input value='{{item.metros}}'></ion-input> </p>
+            <div class="sets"><p *ngFor="let items of item.set">{{items[0]}}{{items[1]}}{{items[2]}}{{items[3]}}</p></div>
+           </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-button fill="clear" shape="around" (click)="abrirAlert(nomeExercicio)"><ion-icon slot="start" name="arrow-redo-outline"></ion-icon>
+                Feedback</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+   </ion-item>
 
     </cdk-virtual-scroll-viewport>
     <ion-button fill="clear" shape="around" color="success" (click)="openAlert()"><ion-icon slot="start" name="arrow-redo-outline"></ion-icon>

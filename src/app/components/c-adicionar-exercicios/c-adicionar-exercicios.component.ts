@@ -46,6 +46,8 @@ exerciseObservation: any;
   @ViewChild('mySearchbar') mySearchbar: ElementRef;
 
   htmlSnippet: string = "<script>safeCode()</script>";
+  trainingId: any;
+  activeTraining: any;
   constructor(private exerciciosService: ExerciciosService, private activatedRoute: ActivatedRoute, private navCtrl: NavController) {
     this.mySearchbar = new ElementRef(null);
 
@@ -72,6 +74,7 @@ exerciseObservation: any;
     const docSnap = await getDoc(querySnapshot);
     if (docSnap.exists()) {
       this.pupilsItem.push(docSnap.data());
+      this.activeTraining = docSnap.data()['treinoAtivo'];
     } else {
       console.log("No such document!");
     }
@@ -86,15 +89,17 @@ this.selectedRadio = "A";
 
     this.pegaRadio();
     this.trainingItems = [];
-    const q = query (collection(db, 'users', `${this.id}`, 'treino'), where("parcela", "==", this.selectedRadio));
+    const q = query (collection(db, 'users', `${this.id}`, 'treino'))
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach(async (doc) => {
+
+      const q = query (collection(db, 'users', `${this.id}`, 'treino', doc.id, 'exercícios'), where("parcela", "==", this.selectedRadio));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       this.trainingItems.push(doc.data());
       this.trainingItemsId = doc.data()['id'];
       this.trainingItemsReps = doc.data()['repeticoes'];
-      console.log(this.trainingItems);
-      console.log(this.trainingItemsReps);
-      console.log(this.trainingItemsId);
+    })
     });
 
   }
@@ -203,34 +208,58 @@ this.filterItems = [];
     });
 
     }
+    async newTraining(){
+
+      if (this.activeTraining !== undefined) {
+        console.log('Treino já ativo')
+        }else{
+
+          const docRef = await addDoc(collection(db, `users/${this.id}/treino`),{
+
+          tipo: 'ABC',
+          objetivo: 'Hipertrofia',
+
+          }
+          );
+          setTimeout(async () => {
+            console.log("Document written with ID: ", docRef.id);
+            await updateDoc(docRef, {
+              idDoc: docRef.id,
+            });
+            const newTrainingDoc = doc(db, `users/${this.id}`);
+            await updateDoc(newTrainingDoc, {
+              treinoAtivo: docRef.id
+            })
+      this.trainingId = docRef.id
+      this.activeTraining = docRef.id
+          }, 1000);
+
+        }
+    }
    async addExerciseInTraining(nome: any, variacao: string, id: any){
     this.idExercise = id;
     this.exerciseVariation = variacao;
     if(!variacao){
       variacao = " ";
     }
-    this.docRef = await setDoc(doc(db, `users/${this.id}/treino`, this.idExercise, ),{
+if (this.trainingId === undefined) {
+this.trainingId = this.activeTraining;
+}
 
-      nome: nome,
-      variacao: variacao,
-      peso: null,
-      observacao: '',
-      repeticoes: this.trainingItemsReps,
-      parcela: this.selectedRadio,
-      id: this.idExercise,
-      video:  this.videoExercise
-    });
-    const docRefPupil = await setDoc(doc(db, `users/${this.id}/treino`, this.idExercise), {
-      nome: nome,
-      variacao: variacao,
-      peso: null,
-      observacao: '',
-      repeticoes: this.trainingItemsReps,
-      parcela: this.selectedRadio,
-      id: this.idExercise,
-      video: this.videoExercise
-    });
+else{
+  const docRefPupil = await addDoc(collection(db, `users/${this.id}/treino/${this.trainingId}/exercícios`), {
+    nome: nome,
+    variacao: variacao,
+    peso: null,
+    observacao: '',
+    repeticoes: null,
+    parcela: this.selectedRadio,
+    id: this.idExercise,
+    video: this.videoExercise
+  });
 console.log('feito');
+}
+
   }
   async updateDataExercise(id: any, repeticoes: number | undefined){
     try {

@@ -14,11 +14,12 @@ import { SafePipe } from './safe.pipe';
 import { CCadastroComponent } from './components/c-cadastro/c-cadastro.component';
 import { CTreinoMuscAlunoComponent } from './components/c-treino-musc-aluno/c-treino-musc-aluno.component';
 import { SafetwoPipe } from './safetwo.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, SafetwoPipe],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,  AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireModule],
+    AngularFireModule, HttpClientModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },],
   bootstrap: [AppComponent],
   schemas: [

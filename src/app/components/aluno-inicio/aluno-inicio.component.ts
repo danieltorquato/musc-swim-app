@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { auth, db } from 'src/environments/environment';
+import { BuscaCepService } from 'src/app/busca-cep.service';
 
 @Component({
   selector: 'app-aluno-inicio',
@@ -14,12 +15,13 @@ export class AlunoInicioComponent  implements OnInit {
   listArray: any[] = [];
   items: any;
 
-  constructor(private navCtrl: NavController) { }
+  constructor(private navCtrl: NavController, private buscaCepService: BuscaCepService) { }
 
   ngOnInit() {
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        this.buscarCep('06343040');
         this.uid = user.uid;
         console.log("Usuário logado: " + this.uid)
         const docRef = onSnapshot(doc(db, 'users/', this.uid), (doc) => {
@@ -39,6 +41,9 @@ logout(){
 }
 getId(id: any){
 console.log(id)
+}
+buscarCep(cep: any){
+  this.buscaCepService.buscaCep(cep).subscribe((cep: any)=>console.log(cep))
 }
 }
 
