@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { doc, updateDoc, getFirestore, onSnapshot, collection, getDocs, getDoc, query, DocumentData } from 'firebase/firestore';
+import { doc, updateDoc, getFirestore, onSnapshot, collection, getDocs, getDoc, query, DocumentData, orderBy } from 'firebase/firestore';
 import { Validators } from '@angular/forms';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
@@ -32,8 +32,8 @@ ano= String(this.data.getFullYear());
     //Captura usuário atual
     onAuthStateChanged(this.auth, async (user: any) => {
       this.uid = user.uid;
-      const querySnapshots  = await getDocs(collection(this.db, 'history', this.uid, this.ano));
-
+      const q  = query (collection(this.db, 'history', this.uid, this.ano), orderBy("timestamp", "desc"));
+const querySnapshots = await getDocs(q);
     querySnapshots.forEach((doc) => {
 
       // doc.data() is never undefined for query doc snapshots

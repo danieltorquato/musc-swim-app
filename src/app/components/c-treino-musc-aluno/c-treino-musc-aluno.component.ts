@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AlertController, NavController, ToastController } from '@ionic/angular';
+import { AlertController, IonModal, NavController, ToastController } from '@ionic/angular';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { query, collection, where, getDocs, getDoc, addDoc, doc, updateDoc, setDoc } from 'firebase/firestore';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
@@ -13,6 +13,8 @@ import { db } from 'src/environments/environment';
   styleUrls: ['./c-treino-musc-aluno.component.scss'],
 })
 export class CTreinoMuscAlunoComponent implements OnInit {
+  @ViewChild(IonModal) modal: IonModal | any;
+
   selectedRadio: string = '';
   trainingItems: any[] = [];
   id: any;
@@ -28,6 +30,9 @@ export class CTreinoMuscAlunoComponent implements OnInit {
   dangerousVideoUrl: string = '';
   videoUrl: any;
   data = new Date();
+  timestamp = Date.now();
+  horaFormatada = `${('0' + this.data.getHours()).slice(-2)}:${('0' + this.data.getMinutes()).slice(-2)}`;
+  dataFormatada = `${('0' + this.data.getDate()).slice(-2)}/${('0' + (this.data.getMonth() + 1)).slice(-2)}/${this.data.getFullYear().toString().slice(-2)}`;
   day = String(this.data.getDate());
   month = String(this.data.toLocaleString('pt-BR', { month: 'long' }));
   year = String(this.data.getFullYear());
@@ -42,18 +47,21 @@ export class CTreinoMuscAlunoComponent implements OnInit {
   items: any;
   docId: string = '';
 typeTraining = true;
+clickedIndexes = new Set<number>();
   public isRunning: boolean = false;
   public seconds: number = 0;
   public centiseconds: number = 0;
   private interval: any;
-  public laps: { seconds: number; centiseconds: number }[] = [];
+  public laps: { lapIndex: number;seconds: number; centiseconds: number }[] = [];
   public totalTime: number = 0;
   public lapCount: number = 0;
   public fastestLap: { seconds: number; centiseconds: number } | null = null;
   public averageTime: { seconds: number; centiseconds: number } | null = null;
+
   isModalOpen = false;
   trainingSwimItems: any[] = [];
   trainingSwimItemsId: any;
+  trainingItemsReps: any;
 
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
@@ -93,18 +101,22 @@ typeTraining = true;
     }
     this.pegaRadio();
     this.trainingItems = [];
-    const q = query(collection(db, 'users', `${this.uid}`, 'treino'), where("parcela", "==", this.selectedRadio));
+    const q = query(collection(db, 'users', `${this.uid}`, 'treino'))
     const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      this.dangerousVideoUrl = doc.data()['video']
-      console.log(this.dangerousVideoUrl);
-      this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.dangerousVideoUrl);
-      doc.data()['video'] = this.videoUrl;
-      console.log(doc.data()['video'])
-      this.trainingItems.push(doc.data());
+    querySnapshot.forEach(async (doc) => {
+      const q = query (collection(db, 'users', `${this.uid}`, 'treino', doc.id, 'exercícios'), where("parcela", "==", this.selectedRadio));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        this.trainingItems.push(doc.data());
+        this.dangerousVideoUrl = doc.data()['video']
+        console.log(this.dangerousVideoUrl);
+        this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.dangerousVideoUrl);
+        doc.data()['video'] = this.videoUrl;
+        console.log(doc.data()['video'])
+        this.trainingItemsId = doc.data()['id'];
+        this.trainingItemsReps = doc.data()['repeticoes'];
+      })
 
-      this.trainingItemsId = doc.data()['id'];
-      console.log(this.trainingItems);
     });
   }
   pegaRadio() {
@@ -116,15 +128,21 @@ typeTraining = true;
       idDocPupil: '',
       answer: '',
       answered: 'Aguardando Resposta',
+      answerDate: '',
+      answerHour: '',
+      answerTimestamp: 0,
       collapsed: false,
-      createDate: '',
+      createDate: this.dataFormatada,
+      createHour: this.horaFormatada,
       img: this.dataUser.img,
       name: this.dataUser.name,
       shortName: this.dataUser.shortName,
       text: this.message,
       exercise: this.nomeExercicio,
-      type: 'exercise',
+      read: false,
+      type: 'Exercício',
       idDoc: '',
+      timestamp: this.timestamp
     });
     await updateDoc(this.docRef, {
       idDoc: this.docRef.id,
@@ -132,12 +150,21 @@ typeTraining = true;
     this.docRefs = await addDoc(collection(db, 'users', this.uid, 'sendFeedbacks'), {
       answer: '',
       answered: 'Aguardando Resposta',
+      answerDate: '',
+      answerHour: '',
+      answerTimestamp: 0,
       collapsed: false,
-      createDate: '',
+      createDate: this.dataFormatada,
+      createHour: this.horaFormatada,
+      img: this.dataUser.img,
+      name: this.dataUser.name,
+      shortName: this.dataUser.shortName,
       text: this.message,
       exercise: this.nomeExercicio,
-      type: 'exercise',
-      idDoc: ''
+      type: 'Exercício',
+      idDoc: '',
+      timestamp: this.timestamp,
+      read: false
     });
     console.log('Document written with ID: ', this.docRefs.id);
     await updateDoc(this.docRefs, {
@@ -177,6 +204,7 @@ typeTraining = true;
 
     await alert.present();
   }
+
   async sendFeedbackTraining() {
     this.docRef = await addDoc(collection(db, 'users', this.dataUser.professor, 'feedbacks'), {
       pupil: this.uid,
@@ -184,35 +212,41 @@ typeTraining = true;
       answer: '',
       answered: 'Aguardando Resposta',
       collapsed: false,
-      createDate: '',
+      createDate: this.dataFormatada,
+      createHour: this.horaFormatada,
       img: this.dataUser.img,
       name: this.dataUser.name,
       shortName: this.dataUser.shortName,
       text: this.message,
-      type: 'training',
+      type: 'Treino',
       read: 'Lido',
       idDoc: '',
       parcela: this.selectedRadio,
+      timestamp: this.timestamp
+
     });
     await updateDoc(this.docRef, {
       idDoc: this.docRef.id,
     });
-    this.docRefs = await addDoc(collection(db, 'users', this.uid, 'sendFeedbacks'), {
+    this.docRefs = await setDoc(doc(db, 'users', this.uid, 'sendFeedbacks', this.docRef.id), {
       answer: '',
       answered: 'Aguardando Resposta',
       collapsed: false,
-      createDate: '',
+      createDate: this.dataFormatada,
+      createHour: this.horaFormatada,
+      img: this.dataUser.img,
+      name: this.dataUser.name,
+      shortName: this.dataUser.shortName,
       text: this.message,
-      type: 'training',
+      type: 'Treino',
       read: 'Não lido',
-      idDoc: ''
+      idDoc: '',
+      timestamp: this.timestamp,
+      parcela: this.selectedRadio,
+
     });
-    console.log('Document written with ID: ', this.docRefs.id);
-    await updateDoc(this.docRefs, {
-      idDoc: this.docRefs.id
-    });
-    await updateDoc(this.docRef, {
-      idDocPupil: this.docRefs.id,
+    await updateDoc(doc(db, 'users', this.uid, 'sendFeedbacks', this.docRef.id), {
+      idDoc: this.docRef.id
     });
   }
   async openAlert() {
@@ -291,6 +325,8 @@ typeTraining = true;
       musc: 1,
       swim: 0,
       hour: this.horaAtual,
+      parcela: this.selectedRadio,
+      timestamp: this.timestamp
     });
     this.docId = (await docRef).id;
     console.log(this.docId);
@@ -301,6 +337,8 @@ typeTraining = true;
       musc: 1,
       swim: 0,
       hour: this.horaAtual,
+      parcela: this.selectedRadio,
+      timestamp: this.timestamp
     });
     await this.registerTrainingAlert()
   }
@@ -348,7 +386,9 @@ typeTraining = true;
     if (this.isRunning) {
       this.isRunning = false;
       clearInterval(this.interval);
-      const lapTime = { seconds: this.seconds, centiseconds: this.centiseconds };
+      const lapTime = {   lapIndex: this.lapCount, // Adicionando o índice da volta
+      seconds: this.seconds,
+      centiseconds: this.centiseconds };
       this.laps.push(lapTime);
       this.lapCount++;
       this.totalTime += lapTime.seconds * 100 + lapTime.centiseconds;
@@ -370,8 +410,12 @@ this.presentAlert();
   recordLap() {
     if (this.isRunning) {
 
-      const lapTime = { seconds: this.seconds, centiseconds: this.centiseconds };
+      const lapTime = {   lapIndex: this.lapCount, // Adicionando o índice da volta
+      seconds: this.seconds,
+      centiseconds: this.centiseconds };
       this.laps.push(lapTime);
+
+      console.log(this.laps)
       this.reset();
       this.lapCount++;
       this.calculateAverageTime();
@@ -402,6 +446,8 @@ this.presentAlert();
         seconds: averageSeconds,
         centiseconds: averageCentiseconds
       };
+    }else {
+      this.averageTime = null; // Se não houver voltas restantes, o tempo médio é null
     }
   }
 
@@ -449,6 +495,27 @@ this.trainingSwimItems = []
 
       console.log(this.trainingSwimItems);
     });
+  });
+}
+getIdTime(id: any){
+console.log(id)
+}
+cancel() {
+  this.modal.dismiss(null, 'cancel');
+}
+invalidTime(lapIndex: any){
+  this.clickedIndexes.add(lapIndex);
+  const removedLap = this.laps.splice(lapIndex, 1)[0]; // Remove a volta e captura o item removido
+  if (
+    this.fastestLap === null ||
+    removedLap.seconds < this.fastestLap.seconds ||
+    removedLap.seconds === this.fastestLap.seconds && removedLap.centiseconds < this.fastestLap.centiseconds
+  ) {
+    this.fastestLap = { ...removedLap }; // Atualiza a melhor volta se a removida era a melhor
+  }
+  this.calculateAverageTime(); // Recalcula a média
+  this.laps.forEach((lap, index) => {
+    lap.lapIndex = index;
   });
 }
 }

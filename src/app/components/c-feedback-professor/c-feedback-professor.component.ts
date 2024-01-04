@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { collection, query, where, getDocs, doc, getDoc, setDoc, addDoc, updateDoc } from 'firebase/firestore';
+import { collection, query, where, getDocs, doc, getDoc, setDoc, addDoc, updateDoc, onSnapshot } from 'firebase/firestore';
 import { db } from 'src/environments/environment';
 
 @Component({
@@ -12,20 +12,27 @@ import { db } from 'src/environments/environment';
 export class CFeedbackProfessorComponent  implements OnInit {
   uid: string = " ";
   id: string = "";
-  data: any;
+  data = new Date();
+  timestamp = Date.now();
+  horaFormatada = `${('0' + this.data.getHours()).slice(-2)}:${('0' + this.data.getMinutes()).slice(-2)}`;
+  dataFormatada = `${('0' + this.data.getDate()).slice(-2)}/${('0' + (this.data.getMonth() + 1)).slice(-2)}/${this.data.getFullYear().toString().slice(-2)}`;
   dataArray: any[] = [];
-  item: any;
+  item: any[] = [];
   message: any;
   docRef: any;
   dataUser: any;
   docRefs: any;
   selectedRadio: string = '';
   function: Promise<void>| undefined;
+  idDoc: any;
+  docRefsF: any;
+  docRefPupil: any;
+  idPupil: any;
   constructor(private alertController: AlertController, private toastController: ToastController) { }
 
   ngOnInit() {
     if (this.selectedRadio == '') {
-      this.selectedRadio = "exercise";
+      this.selectedRadio = "Exercício";
     }
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
@@ -40,29 +47,21 @@ export class CFeedbackProfessorComponent  implements OnInit {
     });
   }
 
- async searchFeedbacks(tipo: any){
-  this.dataArray = [];
-  this.item = [];
-    tipo = this.selectedRadio;
-      const queryLa = collection(db, 'users', this.uid, 'feedbacks');
-      const q = query(queryLa, where('answered', '==', 'Aguardando Resposta'), where('type', '==', this.selectedRadio));
-      const queryL = await getDocs(q);
-      queryL.forEach(async (docs) => {
-        this.id = docs.id;
-        this.dataArray.push(docs.data());
-        console.log(this.dataArray);
-        this.item = this.dataArray;
-      });
-                    }
-  sendFeedbackExercise(){
-this.item.forEach((docs: any)=>{
-console.log(docs.data());
+ async searchFeedbacks(type: any){
+  const q = query(collection(db, "users", this.uid, "feedbacks"), where("type", "==", type));
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    this.item = [];
+    querySnapshot.forEach((doc) => {
+     this.idPupil = doc.data()['pupil']
+        this.item.push(doc.data());
+    });
+  });
 
-})
-  }
-  async openAlertExercise() {
+                    }
+  async sendFeedbackExercise(docId: any){
+
     const alert = await this.alertController.create({
-      header: 'Enviar Feedback',
+      header: 'Feedback de exercício',
       inputs: [
         {
           name: 'mensagem',
@@ -79,9 +78,23 @@ console.log(docs.data());
           text: 'Enviar',
           handler: async (data) => {
             this.message = data.mensagem;
-            // Lógica para enviar o feedback ao professor
-            console.log('Mensagem:', this.message);
-            this.sendFeedbackExercise();
+            const docRef = doc(db, "users", this.uid, 'feedbacks', docId);
+
+            await updateDoc(docRef, {
+              answered: 'Respondido',
+              answer: data.mensagem,
+              answerDate: this.dataFormatada,
+              answerHour: this.horaFormatada,
+              answerTimestamp: this.timestamp
+            });
+            const docRefPupil = doc(db, "users", this.idPupil, 'sendFeedbacks', docId);
+            await updateDoc(docRefPupil, {
+              answered: 'Respondido',
+              answer: data.mensagem,
+              answerDate: this.dataFormatada,
+              answerHour: this.horaFormatada,
+              answerTimestamp: this.timestamp
+            });
             this.presentToastExercise('bottom');
           },
         },
@@ -90,6 +103,7 @@ console.log(docs.data());
 
     await alert.present();
   }
+
   async presentToastExercise(position: 'bottom') {
     const toast = await this.toastController.create({
       message: 'Feedback de exercício enviado!',
@@ -98,49 +112,11 @@ console.log(docs.data());
     });
     await toast.present();
   }
-  sendFeedbackTraining(){
-    this.item.forEach(async (docs: any)=>{
-    console.log(docs.data());
-    this.docRef = await addDoc(collection(db, 'users', this.item.pupil, 'feedbacks'), {
-      professor: this.uid,
-      answer: this.message,
-      answered: 'Respondido',
-      collapsed: false,
-      createDate: '',
-      img: this.item.img,
-      name: this.item.name,
-      shortName: this.item.shortName,
-      text: this.message,
-      type: 'training',
-      read: 'Lido',
-      idDoc: '',
-      parcela: this.item.parcela,
-    });
-    await updateDoc(this.docRef, {
-      idDoc: this.docRef.id,
-    });
-    this.docRefs = await addDoc(collection(db, 'users', this.uid, 'sendFeedbacks'), {
-      answer: '',
-      answered: 'Aguardando Resposta',
-      collapsed: false,
-      createDate: '',
-      text: this.message,
-      type: 'training',
-      read: 'Não lido',
-      idDoc: ''
-    });
-    console.log('Document written with ID: ', this.docRefs.id);
-    await updateDoc(this.docRefs, {
-      idDoc: this.docRefs.id
-    });
-    await updateDoc(this.docRef, {
-      idDocPupil: this.docRefs.id,
-    });
-    })
-      }
-      async openAlertTraining() {
+
+  async sendFeedbackTraining(docId: any){
+
         const alert = await this.alertController.create({
-          header: 'Enviar Feedback',
+          header: 'Feedback de treino',
           inputs: [
             {
               name: 'mensagem',
@@ -156,11 +132,29 @@ console.log(docs.data());
             {
               text: 'Enviar',
               handler: async (data) => {
+
+
                 this.message = data.mensagem;
-                // Lógica para enviar o feedback ao professor
                 console.log('Mensagem:', this.message);
-                this.sendFeedbackTraining();
                 this.presentToastTraining('bottom');
+
+const docRef = doc(db, "users", this.uid, 'feedbacks', docId);
+
+await updateDoc(docRef, {
+  answered: 'Respondido',
+  answer: data.mensagem,
+  answerDate: this.dataFormatada,
+  answerHour: this.horaFormatada,
+  answerTimestamp: this.timestamp
+});
+const docRefPupil = doc(db, "users", this.idPupil, 'sendFeedbacks', docId);
+await updateDoc(docRefPupil, {
+  answered: 'Respondido',
+  answer: data.mensagem,
+  answerDate: this.dataFormatada,
+  answerHour: this.horaFormatada,
+  answerTimestamp: this.timestamp
+});
               },
             },
           ],
@@ -168,6 +162,7 @@ console.log(docs.data());
 
         await alert.present();
       }
+
       async presentToastTraining(position: 'bottom') {
         const toast = await this.toastController.create({
           message: 'Feedback de treino enviado!',
@@ -181,16 +176,5 @@ console.log(docs.data());
     console.log(id);
     }
 
-    sendFeedback(type: string){
-      switch (type) {
-        case 'exercise':
-          this.openAlertExercise();
-          break;
-        case 'training':
-          this.openAlertTraining();
-break;
-        default:
-          break;
-      }
-    }
+
 }

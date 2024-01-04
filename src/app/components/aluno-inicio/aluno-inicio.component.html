@@ -51,7 +51,7 @@
     <ion-row class="iconsGrid" style="max-width: 540px; ">
       <ion-col>
 
-         <a  >
+         <a routerLink="/personal-info/{{item.professor}}" >
            <button class="icons">
               <img src="https://img.icons8.com/017bcc/personal-trainer" />
               <p >Personal</p>
@@ -82,13 +82,13 @@
 
     </ion-col>
  <ion-col>
-     <a>
+     <a href="feedback-alunos">
         <button class="icons">
           <img src="https://img.icons8.com/017bcc/chat"/>
           <p>Feedback</p>
         </button>
      </a>
-      <a href="/musc-training">
+      <a href="/treino-musc-aluno">
         <button class="icons">
         <img src="https://img.icons8.com/017bcc/strength"/>
         <p>Meu treino</p>
@@ -133,7 +133,7 @@
 
     </ion-col>
  <ion-col>
-     <a>
+     <a href="/feedback-professor">
         <button class="icons">
           <img src="https://img.icons8.com/017bcc/chat"/>
           <p>Feedback</p>

@@ -37,9 +37,8 @@ export class CAlunosComponent  implements OnInit {
               this.data = await getDoc(docRef);
               const docRefs = doc(db, 'users', this.uid, 'pupils', this.data.id);
               setDoc(docRefs, this.data.data());
-              this.dataArray.push(this.data.data());
-              console.log(this.dataArray);
-              this.results.push(this.dataArray);
+              this.results.push(this.data.data());
+
             });
       } else {
         alert('Você precisa estar logado');

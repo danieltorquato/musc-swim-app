@@ -41,6 +41,10 @@ const routes: Routes = [
   {
     path: 'feedback-alunos',
     loadChildren: () => import('./pages/feedback-alunos/feedback-alunos.module').then( m => m.FeedbackAlunosPageModule)
+  },
+  {
+    path: 'personal-info/:info',
+    loadChildren: () => import('./pages/personal-info/personal-info.module').then( m => m.PersonalInfoPageModule)
   }
 
 ];

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button  text="Voltar" default-href="#"></ion-back-button>
     </ion-buttons>
     <ion-title>Histórico</ion-title>
   </ion-toolbar>
@@ -32,10 +32,10 @@
           <ion-col size="auto">
           </ion-col>
           <ion-col>
-            <ion-card-title class="card-text">{{item.day}}/{{item.monthNumber}}/{{item.year}}</ion-card-title>
+            <ion-card-title class="card-text">{{item.day}}/{{item.month}}/{{item.year}}</ion-card-title>
           </ion-col>
           <ion-col>
-            Treino: A
+            Treino: {{item.parcela}}
           </ion-col>
           <ion-col>
             <ion-card-subtitle class="card-text">{{item.hour}}</ion-card-subtitle>

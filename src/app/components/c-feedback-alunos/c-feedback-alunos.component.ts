@@ -1,7 +1,7 @@
 import { db } from 'src/environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { query, collection, onSnapshot } from 'firebase/firestore';
+import { query, collection, onSnapshot, where, orderBy } from 'firebase/firestore';
 
 @Component({
   selector: 'app-c-feedback-alunos',
@@ -14,32 +14,40 @@ export class CFeedbackAlunosComponent  implements OnInit {
   auth = getAuth();
   idDoc: any;
   dataDoc: any;
+  selectedSegment: string = '';
+
   constructor() { }
 
   ngOnInit() {
-    this.carregarFeedbacks();
-  }
-  async carregarFeedbacks() {
-    onAuthStateChanged(this.auth, async (user: any) => {
+    if (this.selectedSegment == '') {
+      this.selectedSegment = "Respondido";
+    }
+    console.log(this.selectedSegment)
+    const auth = getAuth();
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
 
-      this.uid = user.uid;
-      const q = await query(collection(db, 'users', this.uid, 'feedbackPupil'));
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        this.feedbacks = [];
-        querySnapshot.forEach((doc)=>{
-
-          // doc.data() is never undefined for query doc snapshots
-          console.log(doc.id, ' => ', doc.data());
-          this.feedbacks.push(doc.data());
-
-          this.dataDoc = doc.data();
-          console.log(this.dataDoc);
-
-        });
-      });
+        this.uid = user.uid;
+        console.log("Usuário logado: " + this.uid)
+        this.searchFeedbacks(this.selectedSegment);
+      } else {
+        alert('Você precisa estar logado');
+      }
     });
+  }
+  async searchFeedbacks(type: any) {
+    const q = query(collection(db, "users", this.uid, "sendFeedbacks"), where("answered", "==", type));
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    this.feedbacks = [];
+    querySnapshot.forEach((doc) => {
+        this.feedbacks.push(doc.data());
+    });
+  });
   }
   toggleCollapse(feedback: any) {
     feedback.collapsed = !feedback.collapsed;
   }
+  async pegaId(id: any){
+    console.log(id);
+    }
 }

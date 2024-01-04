@@ -1,17 +1,22 @@
-<ion-toolbar>
-  <ion-buttons slot="start">
-    <ion-back-button default-href="#"></ion-back-button>
-  </ion-buttons>
-</ion-toolbar>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button  text="Voltar" default-href="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Feedbacks</ion-title>
+  </ion-toolbar>
+</ion-header>
 <cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
-<ion-radio-group value="typeoffeedback" [(ngModel)]="selectedRadio" (ngModelChange)="searchFeedbacks(selectedRadio)">
-  <ion-radio value="exercise">Exercícios</ion-radio><br />
-  <ion-radio value="training">Treino</ion-radio><br />
-</ion-radio-group>
-<ion-list >
-  <ion-item *ngFor="let items of item">
-    <ion-card  >
-      <ion-card-content (click)="pegaId(items.pupil)">
+<ion-segment value="default" [(ngModel)]="selectedRadio" (ngModelChange)="searchFeedbacks(selectedRadio)">
+  <ion-segment-button value="Exercício">
+    <ion-label>Exercício</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="Treino">
+    <ion-label>Treino</ion-label>
+  </ion-segment-button>
+</ion-segment>
+    <ion-card *ngFor="let items of item" >
+      <ion-card-content (click)="pegaId(items.idDoc)">
         <ion-grid>
           <ion-row>
             <ion-col size="auto">
@@ -21,20 +26,20 @@
               <ion-card-title>{{ items.shortName }}</ion-card-title>
               <ion-card-subtitle>{{ items.name }}</ion-card-subtitle>
               <p><span class="informationData">Texto:</span> {{ items.text }}</p>
-              <p *ngIf="items.type === 'exercise'">Exercício: {{items.exercise}}</p>
+              <p *ngIf="items.type === 'Exercício'">Exercício: {{items.exercise}}</p>
             </ion-col>
 
           </ion-row>
         </ion-grid>
       </ion-card-content>
       <ion-col size="1">
-        <ion-button fill="clear" (click)="sendFeedback(items.type)">
+        <ion-button *ngIf="items.type === 'Treino' " fill="clear" (click)="sendFeedbackTraining(items.idDoc)">
+          <ion-icon slot="icon-only" name="arrow-undo-sharp"></ion-icon>
+        </ion-button>
+        <ion-button *ngIf="items.type === 'Exercício' " fill="clear" (click)="sendFeedbackExercise(items.idDoc)">
           <ion-icon slot="icon-only" name="arrow-undo-sharp"></ion-icon>
         </ion-button>
 
       </ion-col>
     </ion-card>
-  </ion-item>
-
-</ion-list>
 </cdk-virtual-scroll-viewport>

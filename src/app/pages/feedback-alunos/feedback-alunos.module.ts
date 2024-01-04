@@ -8,13 +8,15 @@ import { FeedbackAlunosPageRoutingModule } from './feedback-alunos-routing.modul
 
 import { FeedbackAlunosPage } from './feedback-alunos.page';
 import { CFeedbackAlunosComponent } from 'src/app/components/c-feedback-alunos/c-feedback-alunos.component';
+import { CdkScrollableModule, ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FeedbackAlunosPageRoutingModule
+    FeedbackAlunosPageRoutingModule,
+    ScrollingModule
   ],
   declarations: [FeedbackAlunosPage, CFeedbackAlunosComponent]
 })
