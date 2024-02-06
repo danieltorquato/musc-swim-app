@@ -34,15 +34,15 @@
 
 
 
-  <cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
 
 
-     <ion-item  *ngIf="typeTraining === true" class=".card">
-        <ion-card *ngFor="let item of trainingItems" (click)="getIdCard(item.nome)">
-        <ion-card-content>
+<cdk-virtual-scroll-viewport  orientation="horizontal" itemSize="56" minBufferPx="900" maxBufferPx="1350">
+<div  *ngIf="typeTraining === true" class="cdk-virtual-scroll-data-source-example" >
+        <ion-card *ngFor="let item of trainingItems" (click)="getIdCard(item.nome)" class="card">
+        <ion-card-content class="card-contents">
           <ion-grid>
-             <ion-row>
-            <ion-col>
+             <ion-row >
+            <ion-col >
               <iframe width="150" height="230" [src]='item.video' scrolling="no" title="Supino reto halteres" frameborder="1" allow="encrypted-media" allowfullscreen> </iframe>
             </ion-col>
              <ion-col>
@@ -63,11 +63,11 @@
         </ion-card-content>
 
       </ion-card>
+    </div>
+  </cdk-virtual-scroll-viewport>
 
-     </ion-item>
 
-
-     <ion-item  *ngIf="typeTraining === false" class=".card">
+     <div *ngIf="typeTraining === false" class="card">
       <ion-card *ngFor="let item of trainingSwimItems">
       <ion-card-content>
         <ion-grid>
@@ -137,8 +137,8 @@
       </ion-modal>
     </ion-card>
 
-   </ion-item>
+   </div>
 
-    </cdk-virtual-scroll-viewport>
-    <ion-button fill="clear" shape="around" color="success" (click)="openAlert()"><ion-icon slot="start" name="arrow-redo-outline"></ion-icon>
-      Concluir Treino</ion-button>
+   <ion-button fill="clear" shape="around" color="success" (click)="openAlert()"><ion-icon slot="start" name="arrow-redo-outline"></ion-icon>
+     Concluir Treino</ion-button>
+

@@ -3,9 +3,9 @@ import { OverlayEventDetail } from '@ionic/core/components';
 import { InfiniteScrollCustomEvent, IonModal, NavController } from '@ionic/angular';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { addDoc, collection, doc, setDoc, getDocs, QuerySnapshot, query, where, getDoc, updateDoc } from 'firebase/firestore';
-import { db } from 'src/environments/environment';
+import { auth, db } from 'src/environments/environment';
 import { ActivatedRoute } from '@angular/router';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { ExerciciosService } from 'src/app/services/exercicios.service';
 import * as _ from 'lodash';
 
@@ -54,7 +54,6 @@ exerciseObservation: any;
    }
 
   ngOnInit() {
-    const auth = getAuth();
   onAuthStateChanged(auth, (user) => {
     if (user) {
       this.uid = user.uid;
@@ -103,7 +102,7 @@ this.selectedRadio = "A";
     });
 
   }
-  async buscarDados(){
+  async searchData(){
     const querySnapshot = await getDocs(collection(db, 'exercicios'));
     this.items = [];
     this.videoExercise = "";

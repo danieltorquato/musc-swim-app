@@ -1,4 +1,4 @@
-<ion-card class="cardPerfil" style="max-width: 540px; margin: auto;" *ngFor="let user of listArray">
+<ion-card class="cardPerfil" style="max-width: 540px; margin: auto;" *ngFor="let user of items">
   <ion-grid *ngIf="user.isProfessor === false">
     <ion-row class="container">
       <ion-col size-md="2" size-lg="1">
@@ -10,7 +10,7 @@
         </div>
         <h2 class="shortName">{{user.shortName}}</h2>
 
-        <h6 class="editPerfil"><a href="/account">Editar Perfil</a></h6>
+        <h6 class="editPerfil"><a href="/perfil">Editar Perfil</a></h6>
       </ion-col>
       <ion-col size-md="2" size-lg="6" class="alert-col">
         <a>
@@ -25,7 +25,6 @@
   <ion-grid *ngIf="user.isProfessor === true">
     <ion-row class="container">
       <ion-col size-md="2" size-lg="1">
-        <!-- Coluna vazia para criar espaço à esquerda -->
       </ion-col>
       <ion-col size-md="8" size-lg="5" class="profile-col">
         <div class="profile-picture">
@@ -33,7 +32,7 @@
         </div>
         <h2 class="shortName">{{user.shortName}}</h2>
        <span class="cref"> <strong>CREF: </strong>{{user.cref}}</span>
-        <h6 class="editPerfil"><a href="/account">Editar Perfil</a></h6>
+        <h6 class="editPerfil"><a href="/perfil">Editar Perfil</a></h6>
       </ion-col>
       <ion-col size-md="2" size-lg="6" class="alert-col">
         <a>
@@ -46,7 +45,7 @@
     </ion-row>
   </ion-grid>
 </ion-card>
-<div class="second-panel" style="max-width: 540px; margin: auto;" *ngFor="let item of listArray">
+<div class="second-panel" style="max-width: 540px; margin: auto;" *ngFor="let item of items">
   <ion-grid *ngIf="item.isProfessor === false">
     <ion-row class="iconsGrid" style="max-width: 540px; ">
       <ion-col>
