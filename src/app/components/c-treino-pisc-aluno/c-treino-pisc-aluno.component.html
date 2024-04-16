@@ -1,0 +1,75 @@
+<ion-toolbar>
+  Treino de Natação
+</ion-toolbar>
+<div class="container" #page>
+  <h3 class="text-center">Nado Livre</h3>
+  <h5 class="text-center">100m</h5>
+  <div>
+    <span class="pupil-name text-center">Aluno: Daniel Monteiro da Silva Torquato</span>
+  </div>
+  <div class="chronometer-header">
+    Pintar de Azul mais escuro
+  </div>
+  <div class="chronometer-content">
+<span>0'46</span><span class="chronometer-miliseconds">91</span>
+<div class="chronometer-btn">
+  <input type="button" value="Volta" class="chronometer-btn-action">
+  <input type="button" value="Pausar" class="chronometer-btn-action chronometer-btn-action-center">
+  <input type="button" value="Parar" class="chronometer-btn-action">
+</div>
+  </div>
+  <ion-button id="open-modal" expand="block" fill="outline" class="chronometer-btn-details">Detalhes do treino</ion-button>
+    <ion-modal #modal trigger="open-modal" [canDismiss]="canDismiss" [presentingElement]="page" [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Desempenho</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="modal.dismiss()">Voltar</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <div class="performance-content">
+            <div class="perfomance-times">
+              <!-- Melhor volta -->
+              <div class="performance-times-header"> Melhor volta</div>
+              <div class="performance-times-content">
+                <div class="performance-times-second-hundredth"><span class="performance-times-second">0'52</span><span class="performance-times-hundredth">03</span></div>
+
+                  <div class="performance-times-difference"><span class="performance-times-difference-second">0'52</span> <span class="performance-times-difference-hundredth">03</span><span><ion-icon name="arrow-up-outline"></ion-icon></span></div>
+
+              </div>
+              <!-- Recorde -->
+              <div class="performance-times-header"> Volta recorde</div>
+              <div class="performance-times-content">
+                <div class="performance-times-second-hundredth"><span class="performance-times-second">0'52</span><span class="performance-times-hundredth">03</span></div>
+
+                  <div class="performance-times-difference"><span class="performance-times-difference-second">0'52</span> <span class="performance-times-difference-hundredth">03</span><span><ion-icon name="arrow-up-outline"></ion-icon></span></div>
+
+              </div>
+            </div>
+            <div class="perfomance-times">
+              <!-- Melhor volta -->
+              <div class="performance-times-header"> Tempo</div>
+              <div class="performance-times-content">
+                <div class="performance-times-second-hundredth"><span class="performance-times-second">0'52</span><span class="performance-times-hundredth">03</span></div>
+
+                  <div class="performance-times-difference"><span class="performance-times-difference-second">0'52</span> <span class="performance-times-difference-hundredth">03</span><span><ion-icon name="arrow-up-outline"></ion-icon></span></div>
+
+              </div>
+              <!-- Recorde -->
+              <div class="performance-times-header"> Tempo recorde</div>
+              <div class="performance-times-content">
+                <div class="performance-times-second-hundredth"><span class="performance-times-second">0'52</span><span class="performance-times-hundredth">03</span></div>
+
+                  <div class="performance-times-difference"><span class="performance-times-difference-second">0'52</span> <span class="performance-times-difference-hundredth">03</span><span><ion-icon name="arrow-up-outline"></ion-icon></span></div>
+
+              </div>
+            </div>
+              </div>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+</div>

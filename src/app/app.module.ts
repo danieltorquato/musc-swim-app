@@ -1,5 +1,5 @@
 import { SharedModule } from './modules/shared/shared.module';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -13,17 +13,17 @@ import { firebaseConfig } from 'src/environments/environment';
 import { SafePipe } from './safe.pipe';
 import { CCadastroComponent } from './components/c-cadastro/c-cadastro.component';
 import { CTreinoMuscAlunoComponent } from './components/c-treino-musc-aluno/c-treino-musc-aluno.component';
-import { SafetwoPipe } from './safetwo.pipe';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, SafetwoPipe],
+  declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,  AngularFireModule.initializeApp(firebaseConfig),
     AngularFireModule, HttpClientModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },],
   bootstrap: [AppComponent],
   schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
+    CUSTOM_ELEMENTS_SCHEMA,
+    NO_ERRORS_SCHEMA
   ],
 })
 export class AppModule {}

@@ -9,18 +9,20 @@
 
 <ion-content>
 <ion-list *ngFor="let item of listArray">
-  <ion-card class="card-text">
+  <ion-card class="card-text" (click)=getId(item.id)>
     <ion-card-header>
       <ion-card-subtitle>
         <ion-grid>
           <ion-row>
             <ion-col>
-              Musculação
+              <ion-label *ngIf="item.musc === 0">Musculação</ion-label>
+              <ion-label *ngIf="item.musc === 1" class="active-label">Musculação</ion-label>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              Piscina
+              <ion-label *ngIf="item.swim === 0">Piscina</ion-label>
+              <ion-label *ngIf="item.swim === 1" class="active-label">Piscina</ion-label>
             </ion-col>
           </ion-row>
         </ion-grid>

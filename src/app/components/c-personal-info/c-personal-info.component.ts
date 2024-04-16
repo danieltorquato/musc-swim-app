@@ -22,12 +22,11 @@ this.getData()
 const docSnap = await getDoc(docRef);
 
 if (docSnap.exists()) {
-  console.log("Document data:", docSnap.data());
   this.data.push(docSnap.data());
-  console.log(this.data)
+  (this.data)
 } else {
   // docSnap.data() will be undefined in this case
-  console.log("No such document!");
+  ("No such document!");
 }
 
 }

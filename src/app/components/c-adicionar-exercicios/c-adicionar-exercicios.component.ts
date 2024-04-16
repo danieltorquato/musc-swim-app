@@ -44,7 +44,6 @@ exerciseObservation: any;
   trainingItemsReps: number | undefined;
   typeTraining = true;
   @ViewChild('mySearchbar') mySearchbar: ElementRef;
-
   htmlSnippet: string = "<script>safeCode()</script>";
   trainingId: any;
   activeTraining: any;
@@ -75,7 +74,7 @@ exerciseObservation: any;
       this.pupilsItem.push(docSnap.data());
       this.activeTraining = docSnap.data()['treinoAtivo'];
     } else {
-      console.log("No such document!");
+      ("No such document!");
     }
   }
   setOpen(isOpen: boolean) {
@@ -115,7 +114,7 @@ this.selectedRadio = "A";
       this.idExercise = doc.data()['id'];
       this.videoExercise = doc.data()['video'];
     });
-    console.log(this.items);
+    (this.items);
 
 }
 emptyList(){
@@ -124,7 +123,7 @@ emptyList(){
   addExercise() {
     this.exerciciosService.adicionarExercicio(this.exercicio)
       .then(async () => {
-        console.log('Exercício adicionado com sucesso!');
+        ('Exercício adicionado com sucesso!');
         // faça algo após adicionar o exercício, se necessário
         // const docRef = await addDoc(collection(db, 'exercicios'), {
         //   nome: this.exercicio.nome,
@@ -160,7 +159,7 @@ emptyList(){
 
     this.videoExercise = "";
     this.searchCategory = '';
-    console.log(event.target.value);
+    (event.target.value);
   const querys:string = event.target.value;
   // eslint-disable-next-line eqeqeq
   if (querys && querys.trim() != '') {
@@ -174,12 +173,12 @@ emptyList(){
       this.exerciseVariation = doc.data()['variacao'];
       this.idExercise = doc.data()['id'];
       this.videoExercise = doc.data()['video'];
-      console.log(this.filterItems);
+      (this.filterItems);
     });
     this.items = _.values(this.filterItems);
-    console.log(this.items);
+    (this.items);
     this.items = this.items.filter((dados: { name: string; }) => dados.name[0].toUpperCase()+  dados.name.substr(1));
-    console.log(this.items);
+    (this.items);
   }else if(querys || querys.trim() == '' && querys.trim() != this.exerciseName){
     this.items = [];
     this.filterItems = [];
@@ -197,7 +196,7 @@ this.filterItems = [];
   this.emptyList();
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, ' => ', doc.data());
+      (doc.id, ' => ', doc.data());
       this.items.push(doc.data());
       this.idExercise = doc.data()['id'];
       this.videoExercise = doc.data()['video'];
@@ -210,7 +209,7 @@ this.filterItems = [];
     async newTraining(){
 
       if (this.activeTraining !== undefined) {
-        console.log('Treino já ativo')
+        ('Treino já ativo')
         }else{
 
           const docRef = await addDoc(collection(db, `users/${this.id}/treino`),{
@@ -221,7 +220,6 @@ this.filterItems = [];
           }
           );
           setTimeout(async () => {
-            console.log("Document written with ID: ", docRef.id);
             await updateDoc(docRef, {
               idDoc: docRef.id,
             });
@@ -256,7 +254,7 @@ else{
     id: this.idExercise,
     video: this.videoExercise
   });
-console.log('feito');
+('feito');
 }
 
   }
@@ -271,7 +269,7 @@ console.log('feito');
       // Executa o update no documento com os novos dados
       await updateDoc(docRef, dataToUpdate);
 
-      console.log('Atualização bem-sucedida!');
+      ('Atualização bem-sucedida!');
     } catch (error) {
       console.error('Erro ao atualizar o documento:', error);
     }
@@ -279,14 +277,14 @@ console.log('feito');
     pegaId(id: any){
     }
     pegaRadio(){
-console.log(this.selectedRadio);
+(this.selectedRadio);
     }
     pegaReps(){
-      console.log(this.numberReps);
+      (this.numberReps);
     }
     alterTraining(){
-      this.typeTraining = !this.typeTraining
-      console.log(this.typeTraining)
+      this.typeTraining = !this.typeTraining;
+      (this.typeTraining)
     }
     resetInput(){
       this.searchTerm =  ''

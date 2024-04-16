@@ -7,18 +7,20 @@ import { IonicModule } from '@ionic/angular';
 import { TreinoMuscAlunoPageRoutingModule } from './treino-musc-aluno-routing.module';
 
 import { TreinoMuscAlunoPage } from './treino-musc-aluno.page';
-import { CTreinoMuscAlunoComponent } from 'src/app/components/c-treino-musc-aluno/c-treino-musc-aluno.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { SafetwoPipe } from 'src/app/safetwo.pipe';
+import { SharedModule } from 'src/app/modules/shared/shared.module';
 
 @NgModule({
   imports: [
+    IonicModule,
     CommonModule,
     FormsModule,
-    IonicModule,
     TreinoMuscAlunoPageRoutingModule,
-    ScrollingModule
+    ScrollingModule,
+    SharedModule
   ],
-  declarations: [TreinoMuscAlunoPage, CTreinoMuscAlunoComponent],
+  declarations: [TreinoMuscAlunoPage],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],

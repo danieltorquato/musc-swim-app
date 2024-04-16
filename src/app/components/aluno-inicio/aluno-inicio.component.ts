@@ -24,7 +24,7 @@ export class AlunoInicioComponent implements OnInit {
 
         const docRef = onSnapshot(doc(db, 'users/', this.uid), (doc) => {
           this.items.push(doc.data());
-          console.log(this.items);
+          (this.items);
         })
       } else {
         this.navCtrl.navigateRoot('login');
@@ -39,7 +39,6 @@ export class AlunoInicioComponent implements OnInit {
     });
   }
   getId(id: any) {
-    console.log(id)
   }
 
 }

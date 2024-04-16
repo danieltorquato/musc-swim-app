@@ -1,0 +1,57 @@
+@font-face {
+  font-family: Digital;
+  src: url(../../fonts/digital-7.ttf);
+}
+*{
+  padding: 0;
+  margin: 0;
+}
+.container{
+  width: 100%;
+  height: 100vh;
+  background-color: #0f2c49;
+}
+.text-center{
+  text-align: center;
+}
+.chronometer-header{
+  background-color: #06223f;
+}
+.chronometer-content{
+  font-size: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  font-family: "Digital";
+  background-color: #0b2035;
+}
+.chronometer-miliseconds{
+  font-size: 75px;
+  display: flex;
+  align-items: flex-end;
+}
+.chronometer-btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+.chronometer-btn-action{
+width: 120px;
+height: 120px;
+border-radius: 100px;
+background-color: transparent;
+border: 3px solid #D9A648;
+font-size: 32px;
+margin-left: 3px;
+margin-right: 3px;
+}
+.chronometer-btn-action-center{
+  border: 3px solid #1B8699;
+}
+.chronometer-btn-details{
+  background-color: transparent;
+  --border-color: #D9A648;
+  --border-style: solid;
+  --border-width: 3px;
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, AnimationController } from '@ionic/angular';
 
 @Component({
   selector: 'app-c-treino-pisc-aluno',
@@ -7,35 +7,40 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./c-treino-pisc-aluno.component.scss'],
 })
 export class CTreinoPiscAlunoComponent  implements OnInit {
-  public isRunning: boolean = false;
-  public seconds: number = 0;
-  public centiseconds: number = 0;
-  private interval: any;
-  public laps: { seconds: number; centiseconds: number }[] = [];
-  public totalTime: number = 0;
-  public lapCount: number = 0;
-  public fastestLap: { seconds: number; centiseconds: number } | null = null;
-  public averageTime: { seconds: number; centiseconds: number } | null = null;
-  public alertButtons = [
-    {
-      text: 'Cancel',
-      role: 'cancel',
-      handler: () => {
-        console.log('Alert canceled');
-      },
-    },
-    {
-      text: 'OK',
-      role: 'confirm',
-      handler: () => {
-        console.log('Alert confirmed');
-      },
-    },
-  ];
+  root: any;
 
-  constructor(private alertController: AlertController) { }
+  async canDismiss(data?: any, role?: string) {
+    return role !== 'gesture';
+  }
+  constructor(private animationCtrl: AnimationController) { }
+  enterAnimation = (baseEl: HTMLElement) => {
+    this.root = baseEl.shadowRoot;
 
+    const backdropAnimation = this.animationCtrl
+      .create()
+      .addElement(this.root.querySelector('ion-backdrop')!)
+      .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
+
+    const wrapperAnimation = this.animationCtrl
+      .create()
+      .addElement(this.root.querySelector('.modal-wrapper')!)
+      .keyframes([
+        { offset: 0, opacity: '0', transform: 'scale(0)' },
+        { offset: 1, opacity: '0.99', transform: 'scale(1)' },
+      ]);
+
+    return this.animationCtrl
+      .create()
+      .addElement(baseEl)
+      .easing('ease-out')
+      .duration(500)
+      .addAnimation([backdropAnimation, wrapperAnimation]);
+  };
+
+  leaveAnimation = (baseEl: HTMLElement) => {
+    return this.enterAnimation(baseEl).direction('reverse');
+  };
   ngOnInit() {}
- 
+
 }
 

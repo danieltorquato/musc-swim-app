@@ -3,10 +3,11 @@ import { FormBuilder } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AlertController, IonModal, NavController, ToastController } from '@ionic/angular';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { query, collection, where, getDocs, getDoc, addDoc, doc, updateDoc, setDoc } from 'firebase/firestore';
+import { query, collection, where, getDocs, getDoc, addDoc, doc, updateDoc, setDoc, onSnapshot } from 'firebase/firestore';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { db } from 'src/environments/environment';
-
+import { register } from 'swiper/element';
+register();
 @Component({
   selector: 'app-c-treino-musc-aluno',
   templateUrl: './c-treino-musc-aluno.component.html',
@@ -16,6 +17,9 @@ export class CTreinoMuscAlunoComponent implements OnInit {
   @ViewChild(IonModal) modal: IonModal | any;
 
   selectedRadio: string = '';
+  numberReps: any;
+  numberKg: any;
+  editInfo: boolean = false;
   trainingItems: any[] = [];
   id: any;
   trainingItemsId: any;
@@ -62,6 +66,8 @@ clickedIndexes = new Set<number>();
   trainingSwimItems: any[] = [];
   trainingSwimItemsId: any;
   trainingItemsReps: any;
+  activeTraining: any | undefined | null;
+  idDocTraining: any;
 
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
@@ -71,14 +77,14 @@ clickedIndexes = new Set<number>();
       text: 'Cancel',
       role: 'cancel',
       handler: () => {
-        console.log('Alert canceled');
+        ('Alert canceled');
       },
     },
     {
       text: 'OK',
       role: 'confirm',
       handler: () => {
-        console.log('Alert confirmed');
+        ('Alert confirmed');
       },
     },
   ];
@@ -96,11 +102,12 @@ clickedIndexes = new Set<number>();
   }
 
   async currentTraining() {
+
+
+this.trainingItems = []
     if (this.selectedRadio == '') {
       this.selectedRadio = "A";
     }
-    this.pegaRadio();
-    this.trainingItems = [];
     const q = query(collection(db, 'users', `${this.uid}`, 'treino'))
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach(async (doc) => {
@@ -108,20 +115,22 @@ clickedIndexes = new Set<number>();
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         this.trainingItems.push(doc.data());
-        this.dangerousVideoUrl = doc.data()['video']
-        console.log(this.dangerousVideoUrl);
+        this.activeTraining = doc.data()['idTraining'];
+        this.idDocTraining = doc.data()['idDoc'];
         this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.dangerousVideoUrl);
         doc.data()['video'] = this.videoUrl;
-        console.log(doc.data()['video'])
+
         this.trainingItemsId = doc.data()['id'];
         this.trainingItemsReps = doc.data()['repeticoes'];
+
       })
 
     });
+
+
+
   }
-  pegaRadio() {
-    console.log(this.selectedRadio);
-  }
+
   async sendFeedbackExercise() {
     this.docRef = await addDoc(collection(db, 'users', this.dataUser.professor, 'feedbacks'), {
       pupil: this.uid,
@@ -166,7 +175,6 @@ clickedIndexes = new Set<number>();
       timestamp: this.timestamp,
       read: false
     });
-    console.log('Document written with ID: ', this.docRefs.id);
     await updateDoc(this.docRefs, {
       idDoc: this.docRefs.id
     });
@@ -194,7 +202,6 @@ clickedIndexes = new Set<number>();
           handler: async (data) => {
             this.message = data.mensagem;
             // Lógica para enviar o feedback ao professor
-            console.log('Mensagem:', this.message);
             this.sendFeedbackExercise();
             this.presentToast('bottom');
           },
@@ -272,7 +279,6 @@ clickedIndexes = new Set<number>();
           handler: async (data) => {
             this.message = data.mensagem;
             // Lógica para enviar o feedback ao professor
-            console.log('Mensagem:', this.message);
             this.sendFeedbackTraining();
             this.registerTraining();
           },
@@ -290,12 +296,11 @@ clickedIndexes = new Set<number>();
         const queryUser = await getDoc(doc(db, 'users', this.uid));
         // ...
         if (queryUser.exists()) {
-          console.log('Document data:', queryUser.data());
           this.dataUser = queryUser.data();
 
         } else {
           // docSnap.data() will be undefined in this case
-          console.log('No such document!');
+          ('No such document!');
         }
         this.currentTraining();
 
@@ -305,9 +310,10 @@ clickedIndexes = new Set<number>();
     });
 
   }
+
   getIdCard(id: any) {
     this.nomeExercicio = id;
-    console.log(id);
+    (id);
   }
   async presentToast(position: 'bottom') {
     const toast = await this.toastController.create({
@@ -329,7 +335,7 @@ clickedIndexes = new Set<number>();
       timestamp: this.timestamp
     });
     this.docId = (await docRef).id;
-    console.log(this.docId);
+    (this.docId);
     const docRefT = setDoc(doc(db, 'users', this.uid, 'history', this.docId), {
       day: this.day,
       month: this.month,
@@ -368,6 +374,25 @@ clickedIndexes = new Set<number>();
       this.trainingSwim();
 
     }
+  }
+  async editData(id:any, idTraining: any){
+    const q = query (collection(db, 'users', this.uid, 'treino',  idTraining, 'exercícios'), where("parcela", "==", this.selectedRadio));
+
+    const unsubscribe = onSnapshot(q, (querySnapshots) => {
+      this.trainingItems = [];
+      querySnapshots.forEach((doc) => {
+               this.trainingItems.push(doc.data());
+
+      });
+
+    });
+
+const editRef = doc(db, "users", this.uid, 'treino', idTraining, 'exercícios', id );
+
+await updateDoc(editRef, {
+  edit: true
+});
+
   }
   start() {
     if (!this.isRunning) {
@@ -415,7 +440,7 @@ this.presentAlert();
       centiseconds: this.centiseconds };
       this.laps.push(lapTime);
 
-      console.log(this.laps)
+      (this.laps)
       this.reset();
       this.lapCount++;
       this.calculateAverageTime();
@@ -460,7 +485,7 @@ this.presentAlert();
         text: 'Cancel',
         role: 'cancel',
         handler: () => {
-          console.log('Alert canceled');
+          ('Alert canceled');
         },
       },
       {
@@ -493,12 +518,12 @@ this.trainingSwimItems = []
       this.trainingSwimItemsId = doc.data()['docId'];
       this.trainingSwimItems.push(doc.data());
 
-      console.log(this.trainingSwimItems);
+      (this.trainingSwimItems);
     });
   });
 }
 getIdTime(id: any){
-console.log(id)
+(id)
 }
 cancel() {
   this.modal.dismiss(null, 'cancel');
@@ -518,4 +543,37 @@ invalidTime(lapIndex: any){
     lap.lapIndex = index;
   });
 }
+  async alterData(idTraining: any, idDoc: any){
+  const editRef = doc(db, "users", this.uid, 'treino', idTraining, 'exercícios', idDoc);
+
+await updateDoc(editRef, {
+  peso: this.numberKg,
+  edit: false
+});
+const q = query (collection(db, 'users', this.uid, 'treino',  idTraining, 'exercícios'), where("parcela", "==", this.selectedRadio));
+
+    const unsubscribe = onSnapshot(q, (querySnapshots) => {
+      this.trainingItems = [];
+      querySnapshots.forEach((doc) => {
+               this.trainingItems.push(doc.data());
+
+      });
+
+    });
+
+    this.numberKg = '';
+
+}
+reloadTraining(idTraining: any){
+  const q = query (collection(db, 'users', this.uid, 'treino',  idTraining, 'exercícios'), where("parcela", "==", this.selectedRadio));
+
+    const unsubscribe = onSnapshot(q, (querySnapshots) => {
+      this.trainingItems = [];
+      querySnapshots.forEach((doc) => {
+               this.trainingItems.push(doc.data());
+
+      });
+});
+}
+
 }

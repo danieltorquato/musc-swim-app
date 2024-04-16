@@ -24,7 +24,7 @@ export class CAlunosComponent  implements OnInit {
         this.uid = user.uid;
         this.searchPupils();
       } else {
-        console.log('Você precisa estar logado');
+        ('Você precisa estar logado');
       }
     });
   }
@@ -57,6 +57,6 @@ handleChange(event: any) {
   }
 }
 async pegaId(id: any){
-console.log(id);
+(id);
 }
 }

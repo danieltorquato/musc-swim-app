@@ -35,7 +35,7 @@ userRegister(){
     .then(async (userCredential) => {
       // Signed in
       const userUid = userCredential.user.uid;
-      console.log(userUid)
+      (userUid)
       await setDoc(doc(this.db, 'users/' + userUid), {
         name: this.registerForm.value.name,
         email: this.registerForm.value.email,

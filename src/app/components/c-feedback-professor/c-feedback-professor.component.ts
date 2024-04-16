@@ -39,7 +39,7 @@ export class CFeedbackProfessorComponent  implements OnInit {
       if (user) {
 
         this.uid = user.uid;
-        console.log("Usuário logado: " + this.uid)
+        ("Usuário logado: " + this.uid)
         this.searchFeedbacks(this.selectedRadio);
       } else {
         alert('Você precisa estar logado');
@@ -135,7 +135,6 @@ export class CFeedbackProfessorComponent  implements OnInit {
 
 
                 this.message = data.mensagem;
-                console.log('Mensagem:', this.message);
                 this.presentToastTraining('bottom');
 
 const docRef = doc(db, "users", this.uid, 'feedbacks', docId);
@@ -173,7 +172,7 @@ await updateDoc(docRefPupil, {
       }
 
   async pegaId(id: any){
-    console.log(id);
+    (id);
     }
 
 

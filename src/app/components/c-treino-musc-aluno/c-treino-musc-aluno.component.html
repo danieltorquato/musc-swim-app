@@ -1,21 +1,13 @@
-<ion-toolbar class="toolbar" *ngIf="typeTraining === false">
+<ion-toolbar class="toolbar">
   <ion-buttons slot="start">
     <ion-back-button default-href="/tabs/tab2"></ion-back-button>
   </ion-buttons>
-  <ion-button (click)="alterTraining()">
-    Ir para musculação
-  </ion-button>
+
 </ion-toolbar>
-<ion-toolbar class="toolbar" *ngIf="typeTraining === true">
-  <ion-buttons slot="start">
-    <ion-back-button default-href="/tabs/tab2"></ion-back-button>
-  </ion-buttons>
-  <ion-button (click)="alterTraining()">
-    Ir para piscina
-  </ion-button>
-</ion-toolbar>
+
+
 <h1>Treino atual</h1>
-<ion-grid *ngIf="typeTraining === true">
+<ion-grid>
   <ion-radio-group [(ngModel)]="selectedRadio" (ngModelChange)="currentTraining()">
     <ion-col>
     <ion-radio value="A">A</ion-radio>
@@ -28,117 +20,92 @@
         </ion-col>
   </ion-radio-group>
 </ion-grid>
+ <swiper-container>
+    <swiper-slide *ngFor="let item of trainingItems" (click)="getIdCard(item.id)" class="card">
+
+    <div  class="cdk-virtual-scroll-data-source-example" >
+
+            <ion-grid class="card-contents">
+               <ion-grid>
+                 <ion-row >
+                <ion-col >
+
+                </ion-col>
+                <ion-col size="10">
+                  <iframe width="280" height="200" [src]="item.video | safetwo: 'resourceUrl'" title="Supino reto halteres" frameborder="1" allow="encrypted-media" allowfullscreen></iframe>
+                </ion-col>
+                <ion-col >
+
+                </ion-col>
+
+                </ion-row>
+               </ion-grid>
+              <ion-row>
+                <ion-col>
+                  <ion-card-title class="nameExercise">{{item.nome}} </ion-card-title>
+                  <ion-card-subtitle class="nameExercise">{{item.variacao}}</ion-card-subtitle>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <p><span class="informationData">Repetições:</span > {{item.repeticoes}} </p>
+    </ion-col>
+    <ion-col>
+      <p><span class="informationData">Séries:</span > {{item.series}} </p>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <p *ngIf="item.edit === false"><span class="informationData">Peso (Kg):</span > {{item.peso}} </p>
+
+        <p *ngIf="item.edit === true"><span class="informationData">Peso (Kg):</span > <ion-input [(ngModel)]="numberKg" autofocus></ion-input> </p>
+    </ion-col>
+    <ion-col>
+
+    </ion-col>
+
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <p *ngIf="item.edit === false"><ion-button (click)="editData(item.idDoc, item.idTraining)">Editar peso</ion-button></p>
+      <p *ngIf="item.edit === true"><ion-button (click)="alterData(item.idTraining, item.idDoc)">Salvar peso</ion-button> </p>
+
+    </ion-col>
+    <ion-col>
+      <p *ngIf="item.edit === false"><ion-button >Ver detalhes</ion-button></p>
+
+      <p *ngIf="item.edit === true"><ion-button >Cancelar </ion-button> </p>
+
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
 
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <div  class="observation">
+Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit eos porro possimus enim! Quod dolore optio, obcaecati necessitatibus sed assumenda reiciendis saepe quam, molestias illo recusandae, amet explicabo odio ducimus.</div>
+
+                </ion-col>
 
 
+              </ion-row>
+              <ion-row>
+                <ion-col>
 
+                    <ion-button fill="clear" shape="around" (click)="abrirAlert(nomeExercicio)"><ion-icon slot="start" name="arrow-redo-outline"></ion-icon>
+                      Feedback</ion-button>
+                  </ion-col>
 
-
-
-<cdk-virtual-scroll-viewport  orientation="horizontal" itemSize="56" minBufferPx="900" maxBufferPx="1350">
-<div  *ngIf="typeTraining === true" class="cdk-virtual-scroll-data-source-example" >
-        <ion-card *ngFor="let item of trainingItems" (click)="getIdCard(item.nome)" class="card">
-        <ion-card-content class="card-contents">
-          <ion-grid>
-             <ion-row >
-            <ion-col >
-              <iframe width="150" height="230" [src]='item.video' scrolling="no" title="Supino reto halteres" frameborder="1" allow="encrypted-media" allowfullscreen> </iframe>
-            </ion-col>
-             <ion-col>
-                <ion-card-title>{{item.nome}}</ion-card-title>
-            <ion-card-subtitle>{{item.variacao}}</ion-card-subtitle>
-            <ion-card-subtitle>Polia</ion-card-subtitle>
-            <p><span class="informationData">Repetições:</span > <ion-input value='{{item.repeticoes}}'></ion-input> </p>
-              <!-- <div class="sets"><p *ngFor="let items of item.set">{{items[0]}}{{items[1]}}{{items[2]}}{{items[3]}}</p></div> -->
-             </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <ion-button fill="clear" shape="around" (click)="abrirAlert(nomeExercicio)"><ion-icon slot="start" name="arrow-redo-outline"></ion-icon>
-                  Feedback</ion-button>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-
-      </ion-card>
-    </div>
-  </cdk-virtual-scroll-viewport>
-
-
-     <div *ngIf="typeTraining === false" class="card">
-      <ion-card *ngFor="let item of trainingSwimItems">
-      <ion-card-content>
-        <ion-grid>
-           <ion-row>
-          <ion-col>
-            <iframe width="150" height="230"  scrolling="no" title="Supino reto halteres" frameborder="1" allow="encrypted-media" allowfullscreen> </iframe>
-          </ion-col>
-           <ion-col>
-              <ion-card-title>{{item.nome}}</ion-card-title>
-          <ion-card-subtitle>Intensidade: {{item.intensidade}}</ion-card-subtitle>
-
-          <p><span class="informationData">Variação:</span > <ion-input value='{{item.variacao}}'></ion-input> </p>
-          <p><span class="informationData">Metros:</span > <ion-input value='{{item.metros}}'></ion-input> </p>
-            <div class="sets"><p *ngFor="let items of item.set">{{items[0]}}{{items[1]}}{{items[2]}}{{items[3]}}</p></div>
-           </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-button fill="clear" shape="around" (click)="abrirAlert(nomeExercicio)"><ion-icon slot="start" name="arrow-redo-outline"></ion-icon>
-                Feedback</ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-content>
-      <ion-button expand="block" (click)="getIdTime(item.docId)" id="open-modal-time" *ngIf="typeTraining === false">Marcar Tempo</ion-button>
-      <ion-modal trigger="open-modal-time">
-        <cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350" class="scrollModal">
-        <ng-template>
-          <ion-header>
-            <ion-toolbar>
-              <ion-title>Modal</ion-title>
-              <ion-buttons slot="end">
-                <ion-button (click)="cancel()">Close</ion-button>
-              </ion-buttons>
-            </ion-toolbar>
-          </ion-header>
-
-          <ion-grid >
-              <ion-card >
-                <ion-card-content>
-                  <ion-label>{{ seconds }}:{{ centiseconds }}</ion-label>
-                </ion-card-content>
-              </ion-card>
-
-              <ion-button (click)="start()" [disabled]="isRunning">Iniciar</ion-button>
-              <ion-button (click)="stop()" [disabled]="!isRunning">Concluir</ion-button>
-              <ion-button (click)="clear()">Novo treino</ion-button>
-              <ion-button (click)="recordLap()" [disabled]="!isRunning">Registrar Volta</ion-button>
-              <div *ngIf="laps.length > 0">
-                <h3>Voltas</h3>
-                <ion-list>
-                  <ion-item *ngFor="let lap of laps; let i = index" >
-                    {{ i + 1 }} - {{ lap.seconds }}:{{ lap.centiseconds }}
-                    <ion-button>validar</ion-button>
-                    <ion-button (click)="invalidTime(lap.lapIndex)">invalidar</ion-button>
-                  </ion-item>
-                </ion-list>
-                <h3>Melhor Volta</h3>
-                <p *ngIf="fastestLap">Melhor volta: {{ fastestLap.seconds }}:{{ fastestLap.centiseconds }}</p>
-                <h3>Média de Tempo</h3>
-                <p *ngIf="averageTime">Média de tempo: {{ averageTime.seconds }}:{{ averageTime.centiseconds }}</p>
-              </div>
+              </ion-row>
             </ion-grid>
 
-          </ng-template>
-        </cdk-virtual-scroll-viewport>
-      </ion-modal>
-    </ion-card>
+            <ion-button fill="clear" shape="around" color="success" (click)="openAlert()"><ion-icon slot="start" name="arrow-redo-outline"></ion-icon>
+              Concluir Treino</ion-button>
+      </div>
+    </swiper-slide>
+  </swiper-container>
 
-   </div>
 
-   <ion-button fill="clear" shape="around" color="success" (click)="openAlert()"><ion-icon slot="start" name="arrow-redo-outline"></ion-icon>
-     Concluir Treino</ion-button>
 

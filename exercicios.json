@@ -1,0 +1,904 @@
+[
+  {
+    "id": 1,
+    "nome": "Agachamento",
+    "descricao": "Exercício que trabalha os músculos das pernas e glúteos.",
+    "categoria": "Pernas",
+    "video": ""
+  },
+  {
+    "id": 2,
+    "nome": "Supino reto",
+    "descricao": "Exercício que trabalha os músculos do peitoral, ombros e tríceps.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 3,
+    "nome": "Levantamento terra",
+    "descricao": "Exercício que trabalha os músculos das costas e pernas.",
+    "categoria": "Costas"
+
+  },
+  {
+    "id": 4,
+    "nome": "Rosca direta",
+    "descricao": "Exercício que trabalha os músculos dos braços, especialmente os bíceps.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 5,
+    "nome": "Desenvolvimento de ombros",
+    "descricao": "Exercício que trabalha os músculos dos ombros e tríceps.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 6,
+    "nome": "Flexão de braço",
+    "descricao": "Exercício que trabalha os músculos do peitoral, ombros e tríceps.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 7,
+    "nome": "Remada curvada",
+    "descricao": "Exercício que trabalha os músculos das costas e bíceps.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 8,
+    "nome": "Leg press",
+    "descricao": "Exercício que trabalha os músculos das pernas, especialmente quadríceps e glúteos.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 9,
+    "nome": "Barra fixa",
+    "descricao": "Exercício que trabalha os músculos das costas e bíceps.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 10,
+    "nome": "Tríceps pulley",
+    "descricao": "Exercício que trabalha os músculos tríceps.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 11,
+    "nome": "Crucifixo",
+    "descricao": "Exercício que trabalha os músculos do peitoral e ombros.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 12,
+    "nome": "Flexão de pernas",
+    "descricao": "Exercício que trabalha os músculos das pernas, especialmente isquiotibiais e glúteos.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 13,
+    "nome": "Elevação lateral",
+    "descricao": "Exercício que trabalha os músculos dos ombros.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 14,
+    "nome": "Rosca bíceps com halteres",
+    "descricao": "Exercício que trabalha os músculos dos bíceps.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 15,
+    "nome": "Abdominal infra",
+    "descricao": "Exercício que trabalha os músculos do abdômen.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 16,
+    "nome": "Puxada frontal",
+    "descricao": "Exercício que trabalha os músculos das costas e ombros.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 17,
+    "nome": "Stiff",
+    "descricao": "Exercício que trabalha os músculos das pernas, especialmente isquiotibiais e glúteos.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 18,
+    "nome": "Pullover",
+    "descricao": "Exercício que trabalha os músculos do peitoral e costas.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 19,
+    "nome": "Desenvolvimento militar",
+    "descricao": "Exercício que trabalha os músculos dos ombros.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 20,
+    "nome": "Tríceps testa",
+    "descricao": "Exercício que trabalha os músculos tríceps.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 21,
+    "nome": "Abdominal oblíquo",
+    "descricao": "Exercício que trabalha os músculos do abdômen.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 22,
+    "nome": "Remada alta",
+    "descricao": "Exercício que trabalha os músculos das costas e ombros.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 23,
+    "nome": "Cadeira extensora",
+    "descricao": "Exercício que trabalha os músculos das pernas, especialmente quadríceps.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 24,
+    "nome": "Supino inclinado",
+    "descricao": "Exercício que trabalha os músculos do peitoral e ombros.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 25,
+    "nome": "Elevação frontal",
+    "descricao": "Exercício que trabalha os músculos dos ombros.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 26,
+    "nome": "Rosca direta",
+    "descricao": "Exercício que trabalha os músculos dos bíceps.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 27,
+    "nome": "Prancha abdominal",
+    "descricao": "Exercício que trabalha os músculos do abdômen.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 28,
+    "nome": "Remada baixa",
+    "descricao": "Exercício que trabalha os músculos das costas e bíceps.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 29,
+    "nome": "Agachamento livre",
+    "descricao": "Exercício que trabalha os músculos das pernas, especialmente quadríceps e glúteos.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 30,
+    "nome": "Supino reto",
+    "descricao": "Exercício que trabalha os músculos do peitoral, ombros e tríceps.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 31,
+    "nome": "Desenvolvimento com halteres",
+    "descricao": "Exercício que trabalha os músculos dos ombros.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 32,
+    "nome": "Rosca martelo",
+    "descricao": "Exercício que trabalha os músculos dos bíceps.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 33,
+    "nome": "Abdominal canivete",
+    "descricao": "Exercício que trabalha os músculos do abdômen.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 34,
+    "nome": "Puxada alta",
+    "descricao": "Exercício que trabalha os músculos das costas e ombros.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 35,
+    "nome": "Cadeira flexora",
+    "descricao": "Exercício que trabalha os músculos das pernas, especialmente isquiotibiais.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 36,
+    "nome": "Crucifixo inclinado",
+    "descricao": "Exercício que trabalha os músculos do peitoral e ombros.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 37,
+    "nome": "Elevação lateral com halteres",
+    "descricao": "Exercício que trabalha os músculos dos ombros.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 38,
+    "nome": "Rosca scott",
+    "descricao": "Exercício que trabalha os músculos dos bíceps.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 39,
+    "nome": "Abdominal reverso",
+    "descricao": "Exercício que trabalha os músculos do abdômen.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 40,
+    "nome": "Remada curvada",
+    "descricao": "Exercício que trabalha os músculos das costas e bíceps.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 41,
+    "nome": "Agachamento hack",
+    "descricao": "Exercício que trabalha os músculos das pernas, especialmente quadríceps e glúteos.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 42,
+    "nome": "Flexão de braço",
+    "descricao": "Exercício que trabalha os músculos do peitoral, ombros e tríceps.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 43,
+    "nome": "Elevação frontal com halteres",
+    "descricao": "Exercício que trabalha os músculos dos ombros.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 44,
+    "nome": "Tríceps pulley",
+    "descricao": "Exercício que trabalha os músculos dos tríceps.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 45,
+    "nome": "Prancha lateral",
+    "descricao": "Exercício que trabalha os músculos do abdômen e oblíquos.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 46,
+    "nome": "Remada cavalinho",
+    "descricao": "Exercício que trabalha os músculos das costas e bíceps.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 47,
+    "nome": "Leg press",
+    "descricao": "Exercício que trabalha os músculos das pernas, especialmente quadríceps e glúteos.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 48,
+    "nome": "Supino inclinado",
+    "descricao": "Exercício que trabalha os músculos do peitoral, ombros e tríceps.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 49,
+    "nome": "Desenvolvimento militar",
+    "descricao": "Exercício que trabalha os músculos dos ombros.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 50,
+    "nome": "Rosca concentrada",
+    "descricao": "Exercício que trabalha os músculos dos bíceps.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 51,
+    "nome": "Panturrilha no leg press",
+    "descricao": "Exercício que trabalha os músculos das panturrilhas.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 52,
+    "nome": "Paralelas",
+    "descricao": "Exercício que trabalha os músculos do tríceps e peitoral.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 53,
+    "nome": "Levantamento terra",
+    "descricao": "Exercício que trabalha os músculos das costas, glúteos e pernas.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 54,
+    "nome": "Abdominal reto",
+    "descricao": "Exercício que trabalha os músculos do abdômen.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 55,
+    "nome": "Crucifixo",
+    "descricao": "Exercício que trabalha os músculos do peitoral e ombros.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 56,
+    "nome": "Desenvolvimento Arnold",
+    "descricao": "Exercício que trabalha os músculos dos ombros.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 57,
+    "nome": "Remada baixa",
+    "descricao": "Exercício que trabalha os músculos das costas, bíceps e antebraços.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 58,
+    "nome": "Agachamento com barra",
+    "descricao": "Exercício que trabalha os músculos das pernas, especialmente quadríceps e glúteos.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 59,
+    "nome": "Rosca martelo",
+    "descricao": "Exercício que trabalha os músculos dos bíceps e antebraços.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 60,
+    "nome": "Prancha abdominal",
+    "descricao": "Exercício que trabalha os músculos do abdômen.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 61,
+    "nome": "Elevação lateral com halteres",
+    "descricao": "Exercício que trabalha os músculos dos ombros.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 62,
+    "nome": "Rosca concentrada no banco inclinado",
+    "descricao": "Exercício que trabalha os músculos dos bíceps.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 63,
+    "nome": "Mergulho",
+    "descricao": "Exercício que trabalha os músculos do tríceps e peitoral.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 64,
+    "nome": "Stiff",
+    "descricao": "Exercício que trabalha os músculos das costas, glúteos e pernas.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 65,
+    "nome": "Elevação frontal com halteres",
+    "descricao": "Exercício que trabalha os músculos dos ombros.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 66,
+    "nome": "Flexão de braço",
+    "descricao": "Exercício que trabalha os músculos do peitoral, tríceps e ombros.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 67,
+    "nome": "Agachamento sumô",
+    "descricao": "Exercício que trabalha os músculos das pernas e glúteos.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 68,
+    "nome": "Supino inclinado com barra",
+    "descricao": "Exercício que trabalha os músculos do peitoral, ombros e tríceps.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 69,
+    "nome": "Elevação de panturrilhas em pé",
+    "descricao": "Exercício que trabalha os músculos das panturrilhas.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 70,
+    "nome": "Barra fixa",
+    "descricao": "Exercício que trabalha os músculos das costas, bíceps e antebraços.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 71,
+    "nome": "Flexão de braço diamante",
+    "descricao": "Exercício que trabalha os músculos do tríceps, peitoral e ombros.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 72,
+    "nome": "Afundo",
+    "descricao": "Exercício que trabalha os músculos das pernas, especialmente quadríceps e glúteos.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 73,
+    "nome": "Puxada alta",
+    "descricao": "Exercício que trabalha os músculos das costas, ombros e bíceps.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 74,
+    "nome": "Rosca Scott",
+    "descricao": "Exercício que trabalha os músculos dos bíceps e antebraços.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 75,
+    "nome": "Prancha lateral",
+    "descricao": "Exercício que trabalha os músculos do abdômen e oblíquos.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 76,
+    "nome": "Elevação frontal com barra",
+    "descricao": "Exercício que trabalha os músculos dos ombros.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 77,
+    "nome": "Supino reto com halteres",
+    "descricao": "Exercício que trabalha os músculos do peitoral e ombros.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 78,
+    "nome": "Remada com halteres",
+    "descricao": "Exercício que trabalha os músculos das costas, ombros e bíceps.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 79,
+    "nome": "Extensão de tríceps com halteres",
+    "descricao": "Exercício que trabalha os músculos do tríceps.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 80,
+    "nome": "Stiff",
+    "descricao": "Exercício que trabalha os músculos dos glúteos, isquiotibiais e lombar.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 81,
+    "nome": "Elevação lateral com halteres",
+    "descricao": "Exercício que trabalha os músculos dos ombros.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 82,
+    "nome": "Crucifixo inclinado com halteres",
+    "descricao": "Exercício que trabalha os músculos do peitoral e ombros.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 83,
+    "nome": "Remada alta com barra",
+    "descricao": "Exercício que trabalha os músculos das costas, ombros e bíceps.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 84,
+    "nome": "Rosca martelo",
+    "descricao": "Exercício que trabalha os músculos dos bíceps e antebraços.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 85,
+    "nome": "Agachamento unilateral",
+    "descricao": "Exercício que trabalha os músculos das pernas de forma unilateral, focando em quadríceps e glúteos.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 86,
+    "nome": "Prancha frontal",
+    "descricao": "Exercício que trabalha os músculos do abdômen, lombar e glúteos.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 87,
+    "nome": "Desenvolvimento com halteres",
+    "descricao": "Exercício que trabalha os músculos dos ombros e tríceps.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 88,
+    "nome": "Voador",
+    "descricao": "Exercício que trabalha os músculos do peitoral e ombros.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 89,
+    "nome": "Barra fixa pronada",
+    "descricao": "Exercício que trabalha os músculos das costas, bíceps e antebraços.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 90,
+    "nome": "Rosca direta",
+    "descricao": "Exercício que trabalha os músculos dos bíceps e antebraços.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 91,
+    "nome": "Levantamento terra",
+    "descricao": "Exercício que trabalha os músculos das costas, glúteos, isquiotibiais e lombar.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 92,
+    "nome": "Tríceps testa",
+    "descricao": "Exercício que trabalha os músculos dos tríceps.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 93,
+    "nome": "Agachamento livre",
+    "descricao": "Exercício que trabalha os músculos das pernas, com foco em quadríceps e glúteos.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 94,
+    "nome": "Prancha lateral",
+    "descricao": "Exercício que trabalha os músculos do abdômen, oblíquos e lombar.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 95,
+    "nome": "Desenvolvimento militar",
+    "descricao": "Exercício que trabalha os músculos dos ombros e tríceps.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 96,
+    "nome": "Crucifixo reto",
+    "descricao": "Exercício que trabalha os músculos do peitoral e ombros.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 97,
+    "nome": "Remada cavalinho",
+    "descricao": "Exercício que trabalha os músculos das costas, glúteos, isquiotibiais e lombar.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 98,
+    "nome": "Rosca concentrada",
+    "descricao": "Exercício que trabalha os músculos dos bíceps e antebraços.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 99,
+    "nome": "Leg press",
+    "descricao": "Exercício que trabalha os músculos das pernas, com foco em quadríceps e glúteos.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 100,
+    "nome": "Prancha com elevação de perna",
+    "descricao": "Exercício que trabalha os músculos do abdômen, lombar e glúteos, com foco na estabilidade do core.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 101,
+    "nome": "Elevação lateral",
+    "descricao": "Exercício que trabalha os músculos dos ombros, em especial o deltóide lateral.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 102,
+    "nome": "Supino inclinado",
+    "descricao": "Exercício que trabalha os músculos do peitoral, ombros e tríceps, com ênfase na parte superior do peitoral.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 103,
+    "nome": "Remada curvada",
+    "descricao": "Exercício que trabalha os músculos das costas, em especial o latíssimo do dorso.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 104,
+    "nome": "Curl com halteres",
+    "descricao": "Exercício que trabalha os músculos dos bíceps, com ênfase na parte superior dos braços.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 105,
+    "nome": "Agachamento sumô",
+    "descricao": "Exercício que trabalha os músculos das pernas, com foco em quadríceps, glúteos e adutores.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 106,
+    "nome": "Prancha inversa",
+    "descricao": "Exercício que trabalha os músculos do abdômen, lombar e glúteos, com foco na estabilidade do core.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 107,
+    "nome": "Desenvolvimento Arnold",
+    "descricao": "Exercício que trabalha os músculos dos ombros, em especial o deltóide anterior.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 108,
+    "nome": "Supino declinado",
+    "descricao": "Exercício que trabalha os músculos do peitoral, ombros e tríceps, com ênfase na parte inferior do peitoral.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 109,
+    "nome": "Puxada alta",
+    "descricao": "Exercício que trabalha os músculos das costas, em especial o latíssimo do dorso e os músculos trapézios.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 110,
+    "nome": "Rosca direta",
+    "descricao": "Exercício que trabalha os músculos dos bíceps, com ênfase na parte inferior dos braços.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 111,
+    "nome": "Afundo",
+    "descricao": "Exercício que trabalha os músculos das pernas, com foco em quadríceps, glúteos e isquiotibiais.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 112,
+    "nome": "Prancha com rodinha",
+    "descricao": "Exercício que trabalha os músculos do abdômen, lombar e glúteos, com foco na estabilidade do core e mobilidade dos ombros.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 113,
+    "nome": "Elevação frontal",
+    "descricao": "Exercício que trabalha os músculos dos ombros, em especial o deltóide anterior.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 114,
+    "nome": "Crucifixo reto",
+    "descricao": "Exercício que trabalha os músculos do peitoral, com ênfase na parte média do peitoral.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 115,
+    "nome": "Remada cavalinho",
+    "descricao": "Exercício que trabalha os músculos das costas, em especial o músculo trapézio.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 116,
+    "nome": "Curl martelo",
+    "descricao": "Exercício que trabalha os músculos dos bíceps, com ênfase nos músculos braquiais e antebraquiais.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 117,
+    "nome": "Cadeira extensora",
+    "descricao": "Exercício que trabalha os músculos das pernas, com foco nos músculos quadríceps.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 118,
+    "nome": "Prancha lateral",
+    "descricao": "Exercício que trabalha os músculos do abdômen, lombar e oblíquos, com foco na estabilidade do core.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 119,
+    "nome": "Elevação de ombros",
+    "descricao": "Exercício que trabalha os músculos dos ombros, em especial o músculo trapézio.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 120,
+    "nome": "Voador",
+    "descricao": "Exercício que trabalha os músculos do peitoral, com ênfase na parte média do peitoral.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 121,
+    "nome": "Remada baixa",
+    "descricao": "Exercício que trabalha os músculos das costas, em especial o músculo latíssimo do dorso.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 122,
+    "nome": "Rosca concentrada",
+    "descricao": "Exercício que trabalha os músculos dos bíceps, com ênfase nos músculos braquiais.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 123,
+    "nome": "Stiff",
+    "descricao": "Exercício que trabalha os músculos das pernas, com foco nos músculos isquiotibiais e glúteos.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 124,
+    "nome": "Prancha invertida",
+    "descricao": "Exercício que trabalha os músculos do abdômen, lombar e glúteos, com foco na estabilidade do core e mobilidade dos ombros.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 125,
+    "nome": "Elevação lateral",
+    "descricao": "Exercício que trabalha os músculos dos ombros, em especial o deltóide lateral.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 126,
+    "nome": "Supino inclinado",
+    "descricao": "Exercício que trabalha os músculos do peitoral superior, com ênfase na parte superior do peitoral.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 127,
+    "nome": "Puxada alta",
+    "descricao": "Exercício que trabalha os músculos das costas, em especial o músculo latíssimo do dorso e bíceps.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 128,
+    "nome": "Tríceps testa",
+    "descricao": "Exercício que trabalha os músculos dos tríceps, com ênfase no músculo tríceps braquial.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 129,
+    "nome": "Agachamento livre",
+    "descricao": "Exercício que trabalha os músculos das pernas, com foco nos músculos quadríceps, glúteos e isquiotibiais.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 130,
+    "nome": "Prancha com rotação de tronco",
+    "descricao": "Exercício que trabalha os músculos do abdômen, lombar, oblíquos e quadrado lombar, com foco na estabilidade do core e mobilidade dos ombros.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 131,
+    "nome": "Desenvolvimento militar",
+    "descricao": "Exercício que trabalha os músculos dos ombros, em especial o deltóide anterior e trapezóides.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 132,
+    "nome": "Flexão de braço",
+    "descricao": "Exercício que trabalha os músculos do peitoral, ombros e tríceps.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 133,
+    "nome": "Remada unilateral",
+    "descricao": "Exercício que trabalha os músculos das costas, em especial o músculo latíssimo do dorso e bíceps, de forma unilateral.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 134,
+    "nome": "Rosca inversa",
+    "descricao": "Exercício que trabalha os músculos dos bíceps, com ênfase nos músculos braquiais e antebraquiais, de forma inversa.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 135,
+    "nome": "Afundo",
+    "descricao": "Exercício que trabalha os músculos das pernas, com foco nos músculos quadríceps, glúteos e isquiotibiais, de forma unilateral.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 136,
+    "nome": "Prancha lateral",
+    "descricao": "Exercício que trabalha os músculos do abdômen, lombar e oblíquos, com foco na estabilidade do core e fortalecimento da região lateral do abdômen.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 137,
+    "nome": "Elevação frontal",
+    "descricao": "Exercício que trabalha os músculos dos ombros, em especial o deltóide anterior.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 138,
+    "nome": "Crucifixo inclinado",
+    "descricao": "Exercício que trabalha os músculos do peitoral, com ênfase na parte inferior do peitoral.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 139,
+    "nome": "Remada baixa",
+    "descricao": "Exercício que trabalha os músculos das costas, em especial o músculo latíssimo do dorso, trapézio e deltóide posterior.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 140,
+    "nome": "Rosca martelo",
+    "descricao": "Exercício que trabalha os músculos dos bíceps, com ênfase nos músculos braquiais e antebraquiais, com pegada neutra.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 141,
+    "nome": "Cadeira extensora",
+    "descricao": "Exercício que trabalha os músculos das pernas, com foco no quadríceps, utilizando uma máquina específica para essa finalidade.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 142,
+    "nome": "Prancha com elevação de perna",
+    "descricao": "Exercício que trabalha os músculos do abdômen, lombar e glúteos, com foco na estabilidade do core e fortalecimento dos glúteos e coxas.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 143,
+    "nome": "Desenvolvimento Arnold",
+    "descricao": "Exercício que trabalha os músculos dos ombros, em especial o deltóide anterior, médio e posterior, com rotação do pulso durante o movimento.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 144,
+    "nome": "Crucifixo declinado",
+    "descricao": "Exercício que trabalha os músculos do peitoral, com ênfase na parte inferior do peitoral, em uma inclinação negativa.",
+    "categoria": "Peitoral"
+  },
+  {
+    "id": 145,
+    "nome": "Remada cavalinho",
+    "descricao": "Exercício que trabalha os músculos das costas, em especial o músculo latíssimo do dorso, trapézio e deltóide posterior, realizado com o tronco inclinado para frente e sem uso de banco de apoio.",
+    "categoria": "Costas"
+  },
+  {
+    "id": 146,
+    "nome": "Rosca concentrada",
+    "descricao": "Exercício que trabalha os músculos dos bíceps, com foco no músculo braquial e antebraquial, realizado com o braço apoiado na coxa.",
+    "categoria": "Braços"
+  },
+  {
+    "id": 147,
+    "nome": "Agachamento sumô",
+    "descricao": "Exercício que trabalha os músculos das pernas, com foco nos músculos quadríceps, glúteos e adutores, realizado com os pés afastados e os dedos apontando para fora.",
+    "categoria": "Pernas"
+  },
+  {
+    "id": 148,
+    "nome": "Prancha com rotação de tronco",
+    "descricao": "Exercício que trabalha os músculos do abdômen, lombar e oblíquos, com foco na estabilidade do core e fortalecimento da região abdominal e lombar com rotação do tronco.",
+    "categoria": "Abdômen"
+  },
+  {
+    "id": 149,
+    "nome": "Elevação lateral",
+    "descricao": "Exercício que trabalha os músculos dos ombros, em especial o deltóide médio, com elevação dos braços para os lados.",
+    "categoria": "Ombros"
+  },
+  {
+    "id": 150,
+    "nome": "Supino fechado",
+    "descricao": "Exercício que trabalha os músculos do tríceps, com ênfase na cabeça medial do tríceps, realizado com pegada mais fechada do que o supino convencional.",
+    "categoria": "Braços"
+  }
+]

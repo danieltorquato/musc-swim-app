@@ -38,7 +38,7 @@ export class CLoginComponent implements OnInit {
       .then((userCredential) => {
         // Signed in
         const userUid = userCredential.user.uid;
-        console.log(userUid);
+        (userUid);
         this.navCtrl.navigateRoot(`/tabs/tab2`);
       })
       .catch((error) => {
@@ -62,7 +62,7 @@ export class CLoginComponent implements OnInit {
           ];
           // Password reset email sent!
           // ..
-          console.log('Enviado')
+          ('Enviado')
         })
         .catch((error) => {
           const errorCode = error.code;

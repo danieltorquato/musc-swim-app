@@ -22,13 +22,13 @@ export class CFeedbackAlunosComponent  implements OnInit {
     if (this.selectedSegment == '') {
       this.selectedSegment = "Respondido";
     }
-    console.log(this.selectedSegment)
+    (this.selectedSegment)
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
       if (user) {
 
         this.uid = user.uid;
-        console.log("Usuário logado: " + this.uid)
+        ("Usuário logado: " + this.uid)
         this.searchFeedbacks(this.selectedSegment);
       } else {
         alert('Você precisa estar logado');
@@ -48,6 +48,6 @@ export class CFeedbackAlunosComponent  implements OnInit {
     feedback.collapsed = !feedback.collapsed;
   }
   async pegaId(id: any){
-    console.log(id);
+    (id);
     }
 }
