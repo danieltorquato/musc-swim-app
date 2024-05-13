@@ -7,21 +7,34 @@
 
 
 <h1>Treino atual</h1>
-<ion-grid>
-  <ion-radio-group [(ngModel)]="selectedRadio" (ngModelChange)="currentTraining()">
-    <ion-col>
-    <ion-radio value="A">A</ion-radio>
-    </ion-col>
-    <ion-col>
-      <ion-radio value="B">B</ion-radio>
-      </ion-col>
-      <ion-col>
-        <ion-radio value="C">C</ion-radio>
-        </ion-col>
-  </ion-radio-group>
+<ion-grid *ngFor="let item of parcelItems">
+  <ion-segment *ngIf="item.tipo === 'Único' " value="Único" [(ngModel)]="selectedSegment" (ngModelChange)="currentTraining(selectedSegment)">
+    <ion-segment-button value="Único">
+      <ion-label>Único</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-segment *ngIf="item.tipo === 'AB'" value="A" [(ngModel)]="selectedSegment" (ngModelChange)="currentTraining(selectedSegment)">
+    <ion-segment-button value="A">
+      <ion-label>A</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="B">
+      <ion-label>B</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-segment *ngIf="item.tipo === 'ABC'" value="A" [(ngModel)]="selectedSegment" (ngModelChange)="currentTraining(selectedSegment)">
+    <ion-segment-button value="A">
+      <ion-label>A</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="B">
+      <ion-label>B</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="C">
+      <ion-label>C</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 </ion-grid>
  <swiper-container>
-    <swiper-slide *ngFor="let item of trainingItems" (click)="getIdCard(item.id)" class="card">
+    <swiper-slide *ngFor="let item of trainingItems" (click)="getIdCard(item.nome)" class="card">
 
     <div  class="cdk-virtual-scroll-data-source-example" >
 

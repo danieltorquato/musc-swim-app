@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AlertController, IonModal, NavController, ToastController } from '@ionic/angular';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { query, collection, where, getDocs, getDoc, addDoc, doc, updateDoc, setDoc, onSnapshot } from 'firebase/firestore';
+import { query, collection, where, getDocs, getDoc, addDoc, doc, updateDoc, setDoc, onSnapshot, orderBy, limit } from 'firebase/firestore';
 import { SharedModule } from 'src/app/modules/shared/shared.module';
 import { db } from 'src/environments/environment';
 import { register } from 'swiper/element';
@@ -68,6 +68,9 @@ clickedIndexes = new Set<number>();
   trainingItemsReps: any;
   activeTraining: any | undefined | null;
   idDocTraining: any;
+  selectedSegment: string = '';
+  parcelItems: any[] = [];
+  lastParcel: any;
 
   setOpen(isOpen: boolean) {
     this.isModalOpen = isOpen;
@@ -93,25 +96,64 @@ clickedIndexes = new Set<number>();
     public formbuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.typeTraining = true;
     this.getData();
     this.getIdCard(this.nomeExercicio);
     if (this.day.length < 10) {
       this.day = String('0' + this.data.getDate()).slice(-2);
     }
   }
+  async getData() {
+    onAuthStateChanged(this.auth, async (user) => {
+      if (user) {
+        this.uid = user.uid;
+        const queryUser = await getDoc(doc(db, 'users', this.uid));
+        if (queryUser.exists()) {
+          this.dataUser = queryUser.data();
+          const q = query(collection(db, "history", this.uid, this.year), orderBy("timestamp", "desc"), limit(1));
 
-  async currentTraining() {
+          const querySnapshot = await getDocs(q);
+          querySnapshot.forEach((doc) => {
+            switch (doc.data()['parcela']) {
+              case 'A':
+                this.selectedSegment = 'B'
+
+                break;
+              case 'B':
+                this.selectedSegment = 'C'
+                break;
+              case 'C':
+                this.selectedSegment = 'A'
+                break;
+
+              default:
+                break;
+            }
+          });
+
+
+        } else {
+          // docSnap.data() will be undefined in this case
+          ('No such document!');
+        }
+        this.getParcel();
+
+        this.currentTraining(this.selectedSegment);
+
+
+      } else {
+        alert('Você precisa estar logado');
+      }
+    });
+
+  }
+  async currentTraining(selectedSegment: any) {
 
 
 this.trainingItems = []
-    if (this.selectedRadio == '') {
-      this.selectedRadio = "A";
-    }
     const q = query(collection(db, 'users', `${this.uid}`, 'treino'))
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach(async (doc) => {
-      const q = query (collection(db, 'users', `${this.uid}`, 'treino', doc.id, 'exercícios'), where("parcela", "==", this.selectedRadio));
+      const q = query (collection(db, 'users', `${this.uid}`, 'treino', doc.id, 'exercícios'), where("parcela", "==", selectedSegment));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         this.trainingItems.push(doc.data());
@@ -130,7 +172,19 @@ this.trainingItems = []
 
 
   }
+ async getParcel(){
 
+    console.log(this.uid);
+
+      const q = query (collection(db, 'users', this.uid, 'treino'))
+      const unsubscribe = onSnapshot(q, (querySnapshots) => {
+        this.parcelItems = [];
+        querySnapshots.forEach((doc) => {
+                 this.parcelItems.push(doc.data());
+
+        });
+    });
+    }
   async sendFeedbackExercise() {
     this.docRef = await addDoc(collection(db, 'users', this.dataUser.professor, 'feedbacks'), {
       pupil: this.uid,
@@ -288,32 +342,11 @@ this.trainingItems = []
 
     await alert.present();
   }
-  async getData() {
-    const auth = getAuth();
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        this.uid = user.uid;
-        const queryUser = await getDoc(doc(db, 'users', this.uid));
-        // ...
-        if (queryUser.exists()) {
-          this.dataUser = queryUser.data();
 
-        } else {
-          // docSnap.data() will be undefined in this case
-          ('No such document!');
-        }
-        this.currentTraining();
-
-      } else {
-        alert('Você precisa estar logado');
-      }
-    });
-
-  }
 
   getIdCard(id: any) {
     this.nomeExercicio = id;
-    (id);
+
   }
   async presentToast(position: 'bottom') {
     const toast = await this.toastController.create({
@@ -331,7 +364,7 @@ this.trainingItems = []
       musc: 1,
       swim: 0,
       hour: this.horaAtual,
-      parcela: this.selectedRadio,
+      parcela: this.selectedSegment,
       timestamp: this.timestamp
     });
     this.docId = (await docRef).id;
@@ -343,7 +376,7 @@ this.trainingItems = []
       musc: 1,
       swim: 0,
       hour: this.horaAtual,
-      parcela: this.selectedRadio,
+      parcela: this.selectedSegment,
       timestamp: this.timestamp
     });
     await this.registerTrainingAlert()
@@ -368,15 +401,9 @@ this.trainingItems = []
 
     await alert.present();
   }
-  alterTraining(){
-    this.typeTraining = !this.typeTraining
-    if (this.typeTraining === false) {
-      this.trainingSwim();
 
-    }
-  }
   async editData(id:any, idTraining: any){
-    const q = query (collection(db, 'users', this.uid, 'treino',  idTraining, 'exercícios'), where("parcela", "==", this.selectedRadio));
+    const q = query (collection(db, 'users', this.uid, 'treino',  idTraining, 'exercícios'), where("parcela", "==", this.selectedSegment));
 
     const unsubscribe = onSnapshot(q, (querySnapshots) => {
       this.trainingItems = [];
@@ -503,46 +530,7 @@ this.presentAlert();
 
     await alert.present();
   }
-async trainingSwim(){
-this.trainingSwimItems = []
-  const q = query(collection(db, 'users', `${this.uid}`, 'treinoPiscina'))
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach(async (doc) => {
-    this.dangerousVideoUrl = doc.data()['video']
-    this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.dangerousVideoUrl);
-    doc.data()['video'] = this.videoUrl;
-    this.trainingSwimItemsId = doc.data()['docId'];
-    const q = query(collection(db, 'users', `${this.uid}`, 'treinoPiscina', this.trainingSwimItemsId, 'exercícios'))
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      this.trainingSwimItemsId = doc.data()['docId'];
-      this.trainingSwimItems.push(doc.data());
 
-      (this.trainingSwimItems);
-    });
-  });
-}
-getIdTime(id: any){
-(id)
-}
-cancel() {
-  this.modal.dismiss(null, 'cancel');
-}
-invalidTime(lapIndex: any){
-  this.clickedIndexes.add(lapIndex);
-  const removedLap = this.laps.splice(lapIndex, 1)[0]; // Remove a volta e captura o item removido
-  if (
-    this.fastestLap === null ||
-    removedLap.seconds < this.fastestLap.seconds ||
-    removedLap.seconds === this.fastestLap.seconds && removedLap.centiseconds < this.fastestLap.centiseconds
-  ) {
-    this.fastestLap = { ...removedLap }; // Atualiza a melhor volta se a removida era a melhor
-  }
-  this.calculateAverageTime(); // Recalcula a média
-  this.laps.forEach((lap, index) => {
-    lap.lapIndex = index;
-  });
-}
   async alterData(idTraining: any, idDoc: any){
   const editRef = doc(db, "users", this.uid, 'treino', idTraining, 'exercícios', idDoc);
 
@@ -565,7 +553,7 @@ const q = query (collection(db, 'users', this.uid, 'treino',  idTraining, 'exerc
 
 }
 reloadTraining(idTraining: any){
-  const q = query (collection(db, 'users', this.uid, 'treino',  idTraining, 'exercícios'), where("parcela", "==", this.selectedRadio));
+  const q = query (collection(db, 'users', this.uid, 'treino',  idTraining, 'exercícios'), where("parcela", "==", this.selectedSegment));
 
     const unsubscribe = onSnapshot(q, (querySnapshots) => {
       this.trainingItems = [];

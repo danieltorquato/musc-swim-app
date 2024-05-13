@@ -15,28 +15,29 @@ export class CFeedbackAlunosComponent  implements OnInit {
   idDoc: any;
   dataDoc: any;
   selectedSegment: string = '';
+  selectedSegmentType: string ='';
 
   constructor() { }
 
   ngOnInit() {
-    if (this.selectedSegment == '') {
-      this.selectedSegment = "Respondido";
+    if (this.selectedSegment == '' || this.selectedSegmentType == '') {
+      this.selectedSegment = "Aguardando Resposta";
+      this.selectedSegmentType = "Treino";
     }
-    (this.selectedSegment)
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
       if (user) {
 
         this.uid = user.uid;
         ("Usuário logado: " + this.uid)
-        this.searchFeedbacks(this.selectedSegment);
+        this.searchFeedbacks(this.selectedSegment, this.selectedSegmentType);
       } else {
         alert('Você precisa estar logado');
       }
     });
   }
-  async searchFeedbacks(type: any) {
-    const q = query(collection(db, "users", this.uid, "sendFeedbacks"), where("answered", "==", type));
+  async searchFeedbacks(type: any, situation: any) {
+    const q = query(collection(db, "users", this.uid, "sendFeedbacks"), where("answered", "==", type), where("type", "==", situation));
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     this.feedbacks = [];
     querySnapshot.forEach((doc) => {
