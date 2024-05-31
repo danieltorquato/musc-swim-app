@@ -1,22 +1,11 @@
-<ion-toolbar class="toolbar" *ngIf="typeTraining === false">
+<ion-toolbar class="toolbar">
   <ion-buttons slot="start">
     <ion-back-button default-href="/alunos"></ion-back-button>
   </ion-buttons>
-  <ion-button (click)="alterTraining()">
-    Ir para musculação
-  </ion-button>
-</ion-toolbar>
-<ion-toolbar class="toolbar" *ngIf="typeTraining === true">
-  <ion-buttons slot="start">
-    <ion-back-button default-href="/alunos"></ion-back-button>
-  </ion-buttons>
-  <ion-button (click)="alterTraining()">
-    Ir para piscina
-  </ion-button>
 </ion-toolbar>
   <cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
   <ion-button expand="full" (click)="setOpen(true)">
-    Teste
+    Adicionar Exercícios
   </ion-button>
   <ion-button expand="full" (click)="newTraining()">
   Novo treino
@@ -93,7 +82,6 @@
       </ion-select>
 
       <ion-button shape="round">Add exercício</ion-button>
-      <ion-button shape="round" (click)="searchData()">Todos os exercícios</ion-button>
 
       <ion-list *ngFor="let item of filterItems" >
         <ion-item >

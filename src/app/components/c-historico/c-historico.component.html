@@ -8,6 +8,14 @@
 </ion-header>
 
 <ion-content>
+  <ion-segment value="7" [(ngModel)]="selectedSegment" (ngModelChange)="searchHistory(selectedSegment)">
+    <ion-segment-button value="7">
+      <ion-label>7 dias</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="30">
+      <ion-label>30 dias</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 <ion-list *ngFor="let item of listArray">
   <ion-card class="card-text" (click)=getId(item.id)>
     <ion-card-header>

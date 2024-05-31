@@ -209,7 +209,7 @@ this.filterItems = [];
     async newTraining(){
 
       if (this.activeTraining !== undefined) {
-        ('Treino já ativo')
+       console.log('Treino já ativo')
         }else{
 
           const docRef = await addDoc(collection(db, `users/${this.id}/treino`),{

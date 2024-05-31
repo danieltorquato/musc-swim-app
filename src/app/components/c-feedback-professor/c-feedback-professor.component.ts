@@ -23,6 +23,7 @@ export class CFeedbackProfessorComponent  implements OnInit {
   dataUser: any;
   docRefs: any;
   selectedRadio: string = '';
+  selectedSegment: string = '';
   function: Promise<void>| undefined;
   idDoc: any;
   docRefsF: any;
@@ -33,6 +34,7 @@ export class CFeedbackProfessorComponent  implements OnInit {
   ngOnInit() {
     if (this.selectedRadio == '') {
       this.selectedRadio = "Exercício";
+      this.selectedSegment = "Aguardando Resposta";
     }
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
@@ -40,15 +42,15 @@ export class CFeedbackProfessorComponent  implements OnInit {
 
         this.uid = user.uid;
         ("Usuário logado: " + this.uid)
-        this.searchFeedbacks(this.selectedRadio);
+        this.searchFeedbacks(this.selectedRadio, this.selectedSegment);
       } else {
         alert('Você precisa estar logado');
       }
     });
   }
 
- async searchFeedbacks(type: any){
-  const q = query(collection(db, "users", this.uid, "feedbacks"), where("type", "==", type));
+ async searchFeedbacks(type: any, situation: any){
+  const q = query(collection(db, "users", this.uid, "feedbacks"), where("type", "==", type), where("answered", "==", situation));
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     this.item = [];
     querySnapshot.forEach((doc) => {
@@ -58,7 +60,7 @@ export class CFeedbackProfessorComponent  implements OnInit {
   });
 
                     }
-  async sendFeedbackExercise(docId: any){
+  async sendFeedbackExercise(docId: any, docPupil: any){
 
     const alert = await this.alertController.create({
       header: 'Feedback de exercício',
@@ -87,7 +89,7 @@ export class CFeedbackProfessorComponent  implements OnInit {
               answerHour: this.horaFormatada,
               answerTimestamp: this.timestamp
             });
-            const docRefPupil = doc(db, "users", this.idPupil, 'sendFeedbacks', docId);
+            const docRefPupil = doc(db, "users", this.idPupil, 'sendFeedbacks', docPupil);
             await updateDoc(docRefPupil, {
               answered: 'Respondido',
               answer: data.mensagem,
@@ -112,8 +114,16 @@ export class CFeedbackProfessorComponent  implements OnInit {
     });
     await toast.present();
   }
+  async presentToastResolved(position: 'bottom') {
+    const toast = await this.toastController.create({
+      message: 'Feedback resolvido!',
+      duration: 1500,
+      position: position,
+    });
+    await toast.present();
+  }
 
-  async sendFeedbackTraining(docId: any){
+  async sendFeedbackTraining(docId: any, docIdPupil: any){
 
         const alert = await this.alertController.create({
           header: 'Feedback de treino',
@@ -146,7 +156,7 @@ await updateDoc(docRef, {
   answerHour: this.horaFormatada,
   answerTimestamp: this.timestamp
 });
-const docRefPupil = doc(db, "users", this.idPupil, 'sendFeedbacks', docId);
+const docRefPupil = doc(db, "users", this.idPupil, 'sendFeedbacks', docIdPupil);
 await updateDoc(docRefPupil, {
   answered: 'Respondido',
   answer: data.mensagem,
@@ -174,6 +184,38 @@ await updateDoc(docRefPupil, {
   async pegaId(id: any){
     (id);
     }
+  async resolvedTraining(docId: any, docPupil: any){
+    const alert = await this.alertController.create({
+      header: 'Resolver treino',
+      message: 'Tem certeza que deseja resolver o treino?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Resolver',
+          handler: async () => {
+            const docRef = doc(db, "users", this.uid, 'feedbacks', docId);
+
+  await updateDoc(docRef, {
+    answered: 'Resolvido',
+
+  });
+  const docRefPupil = doc(db, "users", this.idPupil, 'sendFeedbacks', docPupil);
+  await updateDoc(docRefPupil, {
+    answered: 'Resolvido',
+
+  });
+  this.presentToastResolved('bottom');
+
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
 
 
 }

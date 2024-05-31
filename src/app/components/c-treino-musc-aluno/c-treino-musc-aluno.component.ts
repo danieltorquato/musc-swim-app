@@ -288,6 +288,8 @@ this.trainingItems = []
     });
     await updateDoc(this.docRef, {
       idDoc: this.docRef.id,
+      idDocPupil: this.docRef.id
+
     });
     this.docRefs = await setDoc(doc(db, 'users', this.uid, 'sendFeedbacks', this.docRef.id), {
       answer: '',
@@ -302,12 +304,14 @@ this.trainingItems = []
       type: 'Treino',
       read: 'Não lido',
       idDoc: '',
+      idDocPupil: '',
       timestamp: this.timestamp,
       parcela: this.selectedRadio,
 
     });
     await updateDoc(doc(db, 'users', this.uid, 'sendFeedbacks', this.docRef.id), {
-      idDoc: this.docRef.id
+      idDoc: this.docRef.id,
+      idDocPupil: this.docRef.id
     });
   }
   async openAlert() {
@@ -365,10 +369,10 @@ this.trainingItems = []
       swim: 0,
       hour: this.horaAtual,
       parcela: this.selectedSegment,
-      timestamp: this.timestamp
+      timestamp: this.timestamp,
+
     });
     this.docId = (await docRef).id;
-    (this.docId);
     const docRefT = setDoc(doc(db, 'users', this.uid, 'history', this.docId), {
       day: this.day,
       month: this.month,
@@ -377,7 +381,8 @@ this.trainingItems = []
       swim: 0,
       hour: this.horaAtual,
       parcela: this.selectedSegment,
-      timestamp: this.timestamp
+      timestamp: this.timestamp,
+
     });
     await this.registerTrainingAlert()
   }

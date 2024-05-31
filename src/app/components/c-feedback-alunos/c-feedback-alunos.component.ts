@@ -1,7 +1,8 @@
 import { db } from 'src/environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { query, collection, onSnapshot, where, orderBy } from 'firebase/firestore';
+import { query, collection, onSnapshot, where, orderBy, doc, updateDoc } from 'firebase/firestore';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-c-feedback-alunos',
@@ -17,7 +18,7 @@ export class CFeedbackAlunosComponent  implements OnInit {
   selectedSegment: string = '';
   selectedSegmentType: string ='';
 
-  constructor() { }
+  constructor(private alertController: AlertController, private toastController: ToastController) { }
 
   ngOnInit() {
     if (this.selectedSegment == '' || this.selectedSegmentType == '') {
@@ -51,4 +52,42 @@ export class CFeedbackAlunosComponent  implements OnInit {
   async pegaId(id: any){
     (id);
     }
-}
+    async presentToastResolved(position: 'bottom') {
+      const toast = await this.toastController.create({
+        message: 'Feedback resolvido!',
+        duration: 1500,
+        position: position,
+      });
+      await toast.present();
+    }
+    async resolvedFeedback(docId: any){
+      const alert = await this.alertController.create({
+        header: 'Resolver treino',
+        message: 'Tem certeza que deseja resolver o treino?',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+          },
+          {
+            text: 'Resolver',
+            handler: async () => {
+            
+    const docRefPupil = doc(db, "users", this.uid, 'sendFeedbacks', docId);
+    await updateDoc(docRefPupil, {
+      answered: 'Resolvido',
+
+    });
+    this.presentToastResolved('bottom');
+
+            },
+          },
+        ],
+      });
+
+      await alert.present();
+    }
+
+
+    }
+

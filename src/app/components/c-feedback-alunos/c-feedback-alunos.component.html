@@ -23,7 +23,7 @@
     <ion-segment-button value="Respondido">
       <ion-label>Respondido</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="Resolvidos">
+    <ion-segment-button value="Resolvido">
       <ion-label>Resolvidos</ion-label>
     </ion-segment-button>
   </ion-segment>
@@ -62,7 +62,7 @@
 
             <p *ngIf="items.type === 'Treino'" class="feedback-card-type-text">Feedback de {{items.type}}</p>
             <p *ngIf="items.type === 'Exercício'" class="feedback-card-type-text">Feedback de {{items.type}} ({{items.exercise}})</p>
-            <div *ngIf="items.answered === 'Respondido'"><button>Resolver</button></div>
+            <div *ngIf="items.answered === 'Respondido'"><button (click)="resolvedFeedback(items.idDoc)">Resolver</button></div>
         </ion-card-content>
         <!-- <ion-col size="1">
 

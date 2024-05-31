@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { doc, updateDoc, getFirestore, onSnapshot, collection, getDocs, getDoc, query, DocumentData, orderBy, where } from 'firebase/firestore';
+import { doc, updateDoc, getFirestore, onSnapshot, collection, getDocs, getDoc, query, DocumentData, orderBy, where, limit } from 'firebase/firestore';
 import { Validators } from '@angular/forms';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
@@ -25,14 +25,21 @@ ano= String(this.data.getFullYear());
   querySnapshot: any;
   userData: any;
   formbuilder: any;
-
+  selectedSegment:any;
   constructor() { }
 
  ngOnInit() {
     //Captura usuário atual
     onAuthStateChanged(this.auth, async (user: any) => {
       this.uid = user.uid;
-      const q  = query (collection(this.db, 'users', this.uid, 'history'), where('year','==',this.ano), orderBy("timestamp", "desc"));
+      this.selectedSegment = '7';
+      this.searchHistory(this.selectedSegment);
+    });
+
+
+}
+  async searchHistory(days: any){
+  const q  = query (collection(this.db, 'users', this.uid, 'history'), where('year','==',this.ano), orderBy("timestamp", "desc"),  limit(days));
 const querySnapshots = await getDocs(q);
     querySnapshots.forEach((doc) => {
 
@@ -41,9 +48,6 @@ const querySnapshots = await getDocs(q);
       this.listArray.push(doc.data());
       console.log(this.listArray);
   });
-    });
-
-
 }
 onIonInfinite(ev: InfiniteScrollCustomEvent) {
   setTimeout(() => {

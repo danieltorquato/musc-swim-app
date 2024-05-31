@@ -8,7 +8,7 @@
 </ion-header>
 <ion-grid>
   <ion-card *ngFor="let item of data">
-    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+    <img alt="Silhouette of mountains" src="{{item.img}}" />
     <ion-card-header>
       <ion-card-title>{{item.name}}</ion-card-title>
       <ion-card-subtitle>{{item.cref}}</ion-card-subtitle>
@@ -20,13 +20,13 @@
 <ion-row>
   <ion-col>
 
-    <ion-img src="https://firebasestorage.googleapis.com/v0/b/vitor-f-app.appspot.com/o/images%2Fpng-transparent-email-email.png?alt=media&token=f9523c31-69ae-414a-814c-0c9359c3481c"></ion-img>
+    <ion-img class="icons" src="https://firebasestorage.googleapis.com/v0/b/vitor-f-app.appspot.com/o/images%2Fpng-transparent-email-email.png?alt=media&token=f9523c31-69ae-414a-814c-0c9359c3481c"></ion-img>
   </ion-col>
   <ion-col>
-    <ion-img src="https://firebasestorage.googleapis.com/v0/b/vitor-f-app.appspot.com/o/images%2Fb357a82495676c6c808a7b8c818f5460.png?alt=media&token=a4271c43-924b-4247-b4dc-2e050c97db34"></ion-img>
+    <ion-img class="icons" src="https://firebasestorage.googleapis.com/v0/b/vitor-f-app.appspot.com/o/images%2Fb357a82495676c6c808a7b8c818f5460.png?alt=media&token=a4271c43-924b-4247-b4dc-2e050c97db34"></ion-img>
   </ion-col>
   <ion-col>
-    <ion-img src="https://firebasestorage.googleapis.com/v0/b/vitor-f-app.appspot.com/o/images%2Fpng-transparent-instagram-thumbnail.png?alt=media&token=93212f70-eb35-411f-8916-5e413c9f9f1f"></ion-img>
+    <ion-img class="icons" src="https://firebasestorage.googleapis.com/v0/b/vitor-f-app.appspot.com/o/images%2Fpng-transparent-instagram-thumbnail.png?alt=media&token=93212f70-eb35-411f-8916-5e413c9f9f1f"></ion-img>
   </ion-col>
 </ion-row>
 
