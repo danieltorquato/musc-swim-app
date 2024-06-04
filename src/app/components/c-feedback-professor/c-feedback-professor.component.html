@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button  text="Voltar" default-href="#"></ion-back-button>
@@ -60,4 +60,79 @@ Resolver
 
       </ion-col>
     </ion-card>
-</cdk-virtual-scroll-viewport>
+</cdk-virtual-scroll-viewport> -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button  text="Voltar" default-href="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Feedbacks</ion-title>
+  </ion-toolbar>
+</ion-header>
+<cdk-virtual-scroll-viewport itemSize="56" minBufferPx="900" maxBufferPx="1350">
+  <ion-segment value="Treino" [(ngModel)]="selectedSegmentType" (ngModelChange)="searchFeedbacks(selectedSegmentType, selectedSegment)" class="segment-type">
+    <ion-segment-button value="Treino">
+      <ion-label>Treino</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Exercício">
+      <ion-label>Exercício</ion-label>
+    </ion-segment-button>
+
+  </ion-segment>
+  <ion-segment value="Pendentes" [(ngModel)]="selectedSegment" (ngModelChange)="searchFeedbacks(selectedSegmentType, selectedSegment)">
+    <ion-segment-button value="Aguardando Resposta">
+      <ion-label>Pendentes</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Respondido">
+      <ion-label>Respondido</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Resolvido">
+      <ion-label>Resolvidos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+      <ion-card *ngFor="let items of item" >
+        <ion-card-content (click)="pegaId(items.idDoc)">
+          <ion-row class="feedback-card-date">
+            <ion-col>
+              {{ items.createDate }}
+            </ion-col>
+            <ion-col size="7">
+            </ion-col>
+            <ion-col>
+
+              {{items.createHour}}
+            </ion-col>
+          </ion-row>
+          <ion-grid>
+            <ion-row style="align-items: center; margin-bottom:-30px;">
+              <ion-col size="auto">
+                <img src="{{ items.img }}" />
+              </ion-col>
+              <ion-col >
+                <ion-card-title>{{ items.shortName }}</ion-card-title>
+                <ion-card-subtitle>{{ items.name }}</ion-card-subtitle>
+
+              </ion-col>
+            </ion-row>
+              <ion-col size="8" class="informationDataText">
+                <p *ngIf="items.text === ''" style="text-align: center;">Sem Texto</p>
+                <p>{{ items.text }}</p>
+                <p *ngIf="items.answered === 'Respondido' "><span class="informationData">Resposta:</span> {{ items.answer }}</p>
+              </ion-col>
+
+
+          </ion-grid>
+
+            <p *ngIf="items.type === 'Treino'" class="feedback-card-type-text">Feedback de {{items.type}}</p>
+            <p *ngIf="items.type === 'Exercício'" class="feedback-card-type-text">Feedback de {{items.type}} ({{items.exercise}})</p>
+            <div *ngIf="items.answered === 'Respondido'"><button (click)="resolvedFeedback(items.idDoc, items.idDocPupil)">Resolver</button></div>
+        </ion-card-content>
+        <!-- <ion-col size="1">
+
+          <ion-button fill="clear" *ngIf="item.rea">
+            <ion-icon slot="icon-only" name="arrow-undo-sharp"></ion-icon>
+          </ion-button>
+
+        </ion-col> -->
+      </ion-card>
+  </cdk-virtual-scroll-viewport>

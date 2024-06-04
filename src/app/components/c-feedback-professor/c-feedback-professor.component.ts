@@ -23,6 +23,7 @@ export class CFeedbackProfessorComponent  implements OnInit {
   dataUser: any;
   docRefs: any;
   selectedRadio: string = '';
+  selectedSegmentType: string = '';
   selectedSegment: string = '';
   function: Promise<void>| undefined;
   idDoc: any;
@@ -32,8 +33,8 @@ export class CFeedbackProfessorComponent  implements OnInit {
   constructor(private alertController: AlertController, private toastController: ToastController) { }
 
   ngOnInit() {
-    if (this.selectedRadio == '') {
-      this.selectedRadio = "Exercício";
+    if (this.selectedSegmentType == '' || this.selectedSegment) {
+      this.selectedSegmentType = "Treino";
       this.selectedSegment = "Aguardando Resposta";
     }
     const auth = getAuth();
@@ -42,7 +43,7 @@ export class CFeedbackProfessorComponent  implements OnInit {
 
         this.uid = user.uid;
         ("Usuário logado: " + this.uid)
-        this.searchFeedbacks(this.selectedRadio, this.selectedSegment);
+        this.searchFeedbacks(this.selectedSegmentType, this.selectedSegment);
       } else {
         alert('Você precisa estar logado');
       }
@@ -184,10 +185,10 @@ await updateDoc(docRefPupil, {
   async pegaId(id: any){
     (id);
     }
-  async resolvedTraining(docId: any, docPupil: any){
+  async resolvedFeedback(docId: any, docPupil: any){
     const alert = await this.alertController.create({
-      header: 'Resolver treino',
-      message: 'Tem certeza que deseja resolver o treino?',
+      header: 'Resolver feedback',
+      message: 'Tem certeza que deseja resolver o feedback?',
       buttons: [
         {
           text: 'Cancelar',

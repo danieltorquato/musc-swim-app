@@ -1,0 +1,19 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+ion-content{
+  height: 100vh;
+}
+h2{
+  text-align: center;
+}
+.schedule-content{
+// display: flex;
+// justify-content: center;
+// align-items: center;
+padding: 20px;
+}
+.schedule-content-buttons>ion-button{
+// margin-left: 10px;
+}

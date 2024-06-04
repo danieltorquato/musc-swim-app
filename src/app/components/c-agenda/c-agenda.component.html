@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button  text="Voltar" default-href="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Agenda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #page>
+    <ion-grid class="schedule-content">
+      <ion-row>
+        <ion-col class="schedule-content-buttons">
+          <ion-button color="success" id="open-modal-add-hour" expand="block">Editar horário</ion-button>
+          <ion-modal #modal trigger="open-modal-add-hour" [canDismiss]="canDismiss" [presentingElement]="page">
+            <ng-template>
+              <ion-header>
+                <ion-toolbar>
+                  <ion-title>Editar horários</ion-title>
+                  <ion-buttons slot="end">
+                    <ion-button (click)="modal.dismiss()">Close</ion-button>
+                  </ion-buttons>
+                </ion-toolbar>
+              </ion-header>
+              <ion-content class="ion-padding">
+                <ion-row>
+                  <ion-col size="8">
+                    <h1>
+                      Horários disponíveis
+                    </h1>
+                  </ion-col>
+                 <ion-col>
+                    <ion-button shape="round" color="success" id="open-modal-add-hour-edit">
+                      <ion-icon slot="icon-only" name="add"></ion-icon>
+                    </ion-button>
+                    <ion-modal #modal trigger="open-modal-add-hour-edit" [canDismiss]="canDismiss" [presentingElement]="page">
+                      <ng-template>
+                        <ion-header>
+                          <ion-toolbar>
+                            <ion-title>Adicionar horários</ion-title>
+                            <ion-buttons slot="end">
+                              <ion-button (click)="modal.dismiss()">Close</ion-button>
+                            </ion-buttons>
+                          </ion-toolbar>
+                        </ion-header>
+                        <ion-content class="ion-padding">
+                          <ion-datetime [showDefaultButtons]="true" doneText="Selecionar data" cancelText="Cancelar" [(ngModel)]="tempo" (ngModelChange)="Tempo()" locale="pt-BR" presentation="date-time" [preferWheel]="true" minuteValues="0,15,30,45" min="{{hourFormated}}"></ion-datetime>
+                        </ion-content>
+                      </ng-template>
+                    </ion-modal>
+                 </ion-col>
+                </ion-row>
+              </ion-content>
+            </ng-template>
+          </ion-modal>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <h2>Próximas aulas</h2>
+    <ion-card *ngFor="let items of hours">
+      <ion-card-header>
+        <ion-row>
+          <ion-col>
+            <ion-card-title>{{items.location}}</ion-card-title>
+
+          </ion-col>
+          <ion-col>
+            <ion-card-title>{{items.hour}}</ion-card-title>
+
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
+
+      <ion-card-content>
+Aluno: {{items.namePupil}}
+<ion-row>
+  <ion-col>
+    <ion-button color="success">
+      Confirmar
+    </ion-button>
+  </ion-col>
+</ion-row>
+      </ion-card-content>
+
+    </ion-card>
+
+    <ion-infinite-scroll>
+      <ion-infinite-scroll-content loadingText="Aguarde..." loadingSpinner="bubbles"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
+
+
